@@ -24,5 +24,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nds-fsd/swipcar-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nds-fsd/swipcar-backendend/issues"
+  },
+  "homepage": "https://github.com/nds-fsd/swipcar-backendend#readme",
+  "description": ""
 }
