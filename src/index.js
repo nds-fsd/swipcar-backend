@@ -8,6 +8,6 @@ const server = app.listen(process.env.PORT, () => {
 });
 
 const appRouter = require('./router');
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use("/", appRouter);
