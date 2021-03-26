@@ -1,9 +1,9 @@
-const { User } = require("../mongo");
+const { Fuel } = require("../mongo");
 
 exports.findAll = (req, res) => {
-  User.find()
-    .then((users) => {
-      res.status(200).json(users);
+  Fuel.find()
+    .then((fuels) => {
+      res.status(200).json(fuels);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,45 +12,45 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  User.findById(id)
-    .then((user) => {
-      res.status(200).json(user);
+  Fuel.findById(id)
+    .then((fuel) => {
+      res.status(200).json(fuel);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.createUser = (req, res) => {
+exports.create = (req, res) => {
   const data = req.body;
-  const newUser = new User(data);
-  newUser
+  const newFuel = new Fuel(data);
+  newFuel
     .save()
     .then(() => {
-      res.status(200).json({ message: "user created" });
+      res.status(200).json(res);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.updateUser = (req, res) => {
+exports.update = (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  User.findByIdAndUpdate(id, data)
-    .then((user) => {
-      res.status(200).json(user);
+  Fuel.findByIdAndUpdate(id, data)
+    .then((fuel) => {
+      res.status(200).json(fuel);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.deleteUser = (req, res) => {
+exports.delete = (req, res) => {
   const id = req.params.id;
-  User.findByIdAndRemove(id)
-    .then((user) => {
-      res.status(200).json({ message: `${user.name} has been deleted` });
+  Fuel.findByIdAndRemove(id)
+    .then((fuel) => {
+      res.status(200).json(fuel);
     })
     .catch((error) => {
       res.status(500).json(error);
