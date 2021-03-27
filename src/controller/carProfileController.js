@@ -9,7 +9,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-    const id = req.params.id;
+    const {id} = req.params;
     CarProfile.findById(id).then((CarProfile) => {
         res.status(200).json(CarProfile);
     }).catch(error => {
@@ -28,17 +28,17 @@ exports.createCarProfile = (req, res) => {
 };
 
 exports.updateCarProfile = (req, res) => {
-    const id = req.params.id;
+    const {id} = req.params;
     const data = req.body;
     CarProfile.findByIdAndUpdate(id, data).then((CarProfile) => {
         res.status(200).json(CarProfile);
     }).catch(error => {
         res.status(500).json(error);
     });
-}
+};
 
 exports.deleteCarProfile = (req, res) => {
-    const id = req.params.id;
+    const {id} = req.params;
     CarProfile.findByIdAndRemove(id)
         .then((CarProfile) => {
             res.status(200).json({ message: `${CarProfile.version} has been deleted` });
@@ -46,5 +46,4 @@ exports.deleteCarProfile = (req, res) => {
         .catch(error => {
             res.status(500).json(error);
         });
-}
-
+};
