@@ -26,8 +26,8 @@ exports.create = (req, res) => {
   const newLowerPrice = new LowerPrice(data);
   newLowerPrice
     .save()
-    .then(() => {
-      res.status(200).json(res);
+    .then((price) => {
+      res.status(200).json(price);
     })
     .catch((error) => {
       res.status(500).json(error);

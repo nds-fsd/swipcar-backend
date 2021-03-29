@@ -26,8 +26,8 @@ exports.create = (req, res) => {
   const newModel = new Model(data);
   newModel
     .save()
-    .then(() => {
-      res.status(200).json(res);
+    .then((model) => {
+      res.status(200).json(model);
     })
     .catch((error) => {
       res.status(500).json(error);

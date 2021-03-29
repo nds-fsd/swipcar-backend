@@ -26,8 +26,8 @@ exports.create = (req, res) => {
   const newBrand = new Brand(data);
   newBrand
     .save()
-    .then(() => {
-      res.status(200).json(res);
+    .then((brand) => {
+      res.status(200).json(brand);
     })
     .catch((error) => {
       res.status(500).json(error);

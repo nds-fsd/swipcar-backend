@@ -26,8 +26,8 @@ exports.create = (req, res) => {
   const newPhotoCar = new PhotoCar(data);
   newPhotoCar
     .save()
-    .then(() => {
-      res.status(200).json(res);
+    .then((photo) => {
+      res.status(200).json(photo);
     })
     .catch((error) => {
       res.status(500).json(error);

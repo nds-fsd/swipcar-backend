@@ -26,8 +26,8 @@ exports.createUser = (req, res) => {
   const newUser = new User(data);
   newUser
     .save()
-    .then(() => {
-      res.status(200).json({ message: "user created" });
+    .then((user) => {
+      res.status(200).json(user);
     })
     .catch((error) => {
       res.status(500).json(error);

@@ -1,9 +1,9 @@
-const { EcoMark } = require("../mongo");
+const { Transmision } = require("../mongo");
 
 exports.findAll = (req, res) => {
-  EcoMark.find()
-    .then((ecoMarks) => {
-      res.status(200).json(ecoMarks);
+  Transmision.find()
+    .then((transmisiones) => {
+      res.status(200).json(transmisiones);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,9 +12,9 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const id = req.params.id;
-  EcoMark.findById(id)
-    .then((ecoMark) => {
-      res.status(200).json(ecoMark);
+  Transmision.findById(id)
+    .then((transmision) => {
+      res.status(200).json(transmision);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -23,11 +23,11 @@ exports.findOne = (req, res) => {
 
 exports.create = (req, res) => {
   const data = req.body;
-  const newEcoMark = new EcoMark(data);
-  newEcoMark
+  const newTransmision = new Transmision(data);
+  newTransmision
     .save()
-    .then((mark) => {
-      res.status(200).json(mark);
+    .then((transmision) => {
+      res.status(200).json(transmision);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -37,9 +37,9 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  EcoMark.findByIdAndUpdate(id, data)
-    .then((ecoMark) => {
-      res.status(200).json(ecoMark);
+  Transmision.findByIdAndUpdate(id, data)
+    .then((transmision) => {
+      res.status(200).json(transmision);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -48,9 +48,9 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
-  EcoMark.findByIdAndRemove(id)
-    .then((ecoMark) => {
-      res.status(200).json(ecoMark);
+  Transmision.findByIdAndRemove(id)
+    .then((transmision) => {
+      res.status(200).json(transmision);
     })
     .catch((error) => {
       res.status(500).json(error);

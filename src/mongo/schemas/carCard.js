@@ -5,25 +5,25 @@ const schema = new mongoose.Schema(
     brand: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Brands",
+      ref: "Brand",
     },
     model: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Models",
+      ref: "Model",
     },
     price: { type: Number, required: true },
     fuel: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "FuelType",
+      ref: "Fuel",
     },
     ecomark: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "EcoMark",
     },
-    photocar: { type: File, required: true },
+    photocar: { type: String, required: true },
   },
   { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
 );

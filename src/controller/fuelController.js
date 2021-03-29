@@ -26,8 +26,8 @@ exports.create = (req, res) => {
   const newFuel = new Fuel(data);
   newFuel
     .save()
-    .then(() => {
-      res.status(200).json(res);
+    .then((fuel) => {
+      res.status(200).json(fuel);
     })
     .catch((error) => {
       res.status(500).json(error);
