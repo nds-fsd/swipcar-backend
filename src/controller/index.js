@@ -1,4 +1,5 @@
 const UserController = require("./userController");
+const CarCardController = require("./carCardController");
 const BrandController = require("./brandController");
 const ModelController = require("./modelController");
 const FuelController = require("./fuelController");
@@ -9,6 +10,7 @@ const PhotoCarController = require("./photoCarController");
 
 module.exports = {
   UserController,
+  CarCardController,
   BrandController,
   ModelController,
   FuelController,
