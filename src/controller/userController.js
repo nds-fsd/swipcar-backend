@@ -11,16 +11,14 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const { id } = req.params;
+  const {id} = req.params;
   User.findById(id)
-    .then((user) => {
-      res.status(200).json(user);
-    })
-    .catch((error) => {
-      res.status(500).json(error);
+    .populate('cars')
+    .exec((err, user) => {        
+        if(err) return res.status(500).json({error: err.getMessage()});
+        return res.status(200).json(user);
     });
 };
-
 exports.createUser = (req, res) => {
   const data = req.body;
   const newUser = new User(data);
