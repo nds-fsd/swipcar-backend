@@ -11,23 +11,21 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const {id} = req.params;
   User.findById(id)
-    .then((user) => {
-      res.status(200).json(user);
-    })
-    .catch((error) => {
-      res.status(500).json(error);
+    .populate('cars')
+    .exec((err, user) => {        
+        if(err) return res.status(500).json({error: err.getMessage()});
+        return res.status(200).json(user);
     });
 };
-
 exports.createUser = (req, res) => {
   const data = req.body;
   const newUser = new User(data);
   newUser
     .save()
-    .then((user) => {
-      res.status(200).json(user);
+    .then(() => {
+      res.status(200).json({ message: "user created" });
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -35,7 +33,7 @@ exports.createUser = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   User.findByIdAndUpdate(id, data)
     .then((user) => {
@@ -47,7 +45,7 @@ exports.updateUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   User.findByIdAndRemove(id)
     .then((user) => {
       res.status(200).json({ message: `${user.name} has been deleted` });
