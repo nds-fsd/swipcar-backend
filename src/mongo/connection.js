@@ -8,6 +8,7 @@ const databaseUser = process.env.DATABASE_USER;
 const databasePassword = process.env.DATABASE_PASSWORD;
 const databaseURL = process.env.DATABASE_URL;
 
+// const uri = "mongodb+srv://nuclio:<password>@cluster0.shij5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 if (databaseURL) {
   mongoose.connect(databaseURL, { useNewUrlParser: true });
 } else if (databaseUser && databasePassword) {

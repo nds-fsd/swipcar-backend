@@ -1,19 +1,32 @@
-
 const express = require("express");
-const { User } = require("../mongo");
+
+const {
+  User,
+  RentingOption,
+  Goody,
+  Equipment,
+  CarProfile,  
+  CarCard,
+  Brand,
+  Model,
+  Fuel,
+  EcoMark,
+  Transmision,
+  LowerPrice,
+  PhotoCar,
+} = require("../mongo");
 const { UserRouter } = require("./userRouter");
-
-const { CarProfile } = require("../mongo");
 const { CarProfileRouter } = require("./carProfileRouter");
-
-const { Equipment } = require("../mongo");
 const { EquipmentRouter } = require("./equipmentRouter");
-
-const { Goody } = require("../mongo");
 const { GoodyRouter } = require("./goodyRouter");
-
-const { RentingOption } = require("../mongo");
 const { RentingOptionRouter } = require("./rentingOptionRouter");
+const { BrandRouter } = require("./brandRouter");
+const { ModelRouter } = require("./modelRouter");
+const { FuelRouter } = require("./fuelRouter");
+const { EcoMarkRouter } = require("./ecoMarkRouter");
+const { TransmisionRouter } = require("./transmisionRouter");
+const { LowerPriceRouter } = require("./lowerPriceRouter");
+const { PhotoCarRouter } = require("./photoCarRouter");
 
 const appRouter = express.Router();
 
@@ -22,5 +35,12 @@ appRouter.use("/carprofile", CarProfileRouter);
 appRouter.use("/equipment", EquipmentRouter);
 appRouter.use("/goody", GoodyRouter);
 appRouter.use("/rentingoption", RentingOptionRouter);
+appRouter.use("/brand", BrandRouter);
+appRouter.use("/model", ModelRouter);
+appRouter.use("/fuel", FuelRouter);
+appRouter.use("/ecomark", EcoMarkRouter);
+appRouter.use("/transmision", TransmisionRouter);
+appRouter.use("/lowerprice", LowerPriceRouter);
+appRouter.use("/photocar", PhotoCarRouter);
 
 module.exports = appRouter;

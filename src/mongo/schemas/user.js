@@ -14,17 +14,17 @@ const schema = new mongoose.Schema(
   { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
 );
 
-
-schema.pre("save", (next) => {
+schema.pre("save", function (next) {
   const user = this;
 
   if (!user.isModified("password")) return next();
 
-  bcrypt.genSalt(10, (err, salt) => {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, (err, hash) => {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       if (err) return next(err);
+
       user.password = hash;
       next();
     });
@@ -34,7 +34,6 @@ schema.pre("save", (next) => {
 schema.methods.comparePassword = (password) => {
   return bcrypt.compareSync(password, this.password);
 };
-
 
 const User = mongoose.model("User", schema);
 
