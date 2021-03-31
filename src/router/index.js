@@ -17,6 +17,7 @@ const {
 } = require("../mongo");
 const { UserRouter } = require("./userRouter");
 const { CarProfileRouter } = require("./carProfileRouter");
+const { CarCardRouter } = require("./carCardRouter");
 const { EquipmentRouter } = require("./equipmentRouter");
 const { GoodyRouter } = require("./goodyRouter");
 const { RentingOptionRouter } = require("./rentingOptionRouter");
@@ -32,6 +33,7 @@ const appRouter = express.Router();
 
 appRouter.use("/user", UserRouter);
 appRouter.use("/carprofile", CarProfileRouter);
+appRouter.use("/carcard", CarCardRouter);
 appRouter.use("/equipment", EquipmentRouter);
 appRouter.use("/goody", GoodyRouter);
 appRouter.use("/rentingoption", RentingOptionRouter);

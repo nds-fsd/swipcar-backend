@@ -13,13 +13,26 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
   CarCard.findById(id)
-    .then((carCard) => {
-      res.status(200).json(carCard);
-    })
-    .catch((error) => {
-      res.status(500).json(error);
-    });
+  .populate('Brand')
+  .populate('Model')
+  .populate('Fuel')
+  .populate('EcoMark')
+  .exec((err, carCard) => {        
+      if(err) return res.status(500).json({error: err.getMessage()});
+      return res.status(200).json(carCard);
+  });
 };
+// exports.findOne = (req, res) => {
+//   const id = req.params.id;
+//   CarCard.findById(id)
+//         .populate('carCard')
+//     .then((carCard) => {
+//       res.status(200).json(carCard);
+//     })
+//     .catch((error) => {
+//       res.status(500).json(error);
+//     });
+// };
 
 exports.create = (req, res) => {
   const data = req.body;
