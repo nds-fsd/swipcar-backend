@@ -1,4 +1,4 @@
-const { PhotoCar } = require("../mongo");
+const { PhotoCar } = require('../mongo');
 
 exports.findAll = (req, res) => {
   PhotoCar.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   PhotoCar.findById(id)
     .then((photoCar) => {
       res.status(200).json(photoCar);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   PhotoCar.findByIdAndUpdate(id, data)
     .then((photoCar) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   PhotoCar.findByIdAndRemove(id)
     .then((photoCar) => {
       res.status(200).json(photoCar);

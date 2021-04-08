@@ -1,4 +1,4 @@
-const { Transmision } = require("../mongo");
+const { Transmision } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Transmision.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Transmision.findById(id)
     .then((transmision) => {
       res.status(200).json(transmision);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   Transmision.findByIdAndUpdate(id, data)
     .then((transmision) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Transmision.findByIdAndRemove(id)
     .then((transmision) => {
       res.status(200).json(transmision);

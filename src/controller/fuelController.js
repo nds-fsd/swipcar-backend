@@ -1,4 +1,4 @@
-const { Fuel } = require("../mongo");
+const { Fuel } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Fuel.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Fuel.findById(id)
     .then((fuel) => {
       res.status(200).json(fuel);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   Fuel.findByIdAndUpdate(id, data)
     .then((fuel) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Fuel.findByIdAndRemove(id)
     .then((fuel) => {
       res.status(200).json(fuel);

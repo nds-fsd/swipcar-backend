@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-const { RentingOption } = require("../mongo");
+const { RentingOption } = require('../mongo');
 
 exports.findAll = (req, res) => {
   RentingOption.find()

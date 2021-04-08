@@ -1,4 +1,4 @@
-const { EcoMark } = require("../mongo");
+const { EcoMark } = require('../mongo');
 
 exports.findAll = (req, res) => {
   EcoMark.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   EcoMark.findById(id)
     .then((ecoMark) => {
       res.status(200).json(ecoMark);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   EcoMark.findByIdAndUpdate(id, data)
     .then((ecoMark) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   EcoMark.findByIdAndRemove(id)
     .then((ecoMark) => {
       res.status(200).json(ecoMark);
