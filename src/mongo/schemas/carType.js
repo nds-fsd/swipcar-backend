@@ -8,6 +8,6 @@ const schema = new mongoose.Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-const Brand = mongoose.model('Brand', schema);
+const CarType = mongoose.model('CarType', schema);
 
-module.exports = Brand;
+module.exports = CarType;

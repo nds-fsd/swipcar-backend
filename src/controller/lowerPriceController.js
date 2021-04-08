@@ -1,4 +1,4 @@
-const { LowerPrice } = require("../mongo");
+const { LowerPrice } = require('../mongo');
 
 exports.findAll = (req, res) => {
   LowerPrice.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   LowerPrice.findById(id)
     .then((lowerPrice) => {
       res.status(200).json(lowerPrice);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   LowerPrice.findByIdAndUpdate(id, data)
     .then((lowerPrice) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   LowerPrice.findByIdAndRemove(id)
     .then((lowerPrice) => {
       res.status(200).json(lowerPrice);

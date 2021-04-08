@@ -1,4 +1,4 @@
-const { CarCard } = require("../mongo");
+const { CarCard } = require('../mongo');
 
 exports.findAll = (req, res) => {
   CarCard.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   CarCard.findById(id)
     .then((carCard) => {
       res.status(200).json(carCard);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   CarCard.findByIdAndUpdate(id, data)
     .then((carCard) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   CarCard.findByIdAndRemove(id)
     .then((carCard) => {
       res.status(200).json(carCard);

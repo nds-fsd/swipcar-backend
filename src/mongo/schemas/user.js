@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+/* eslint-disable prefer-arrow-callback */
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const schema = new mongoose.Schema(
   {
@@ -9,15 +10,21 @@ const schema = new mongoose.Schema(
     direccion: { type: String, required: true },
     phone: { type: String, required: true },
     url: { type: String, required: true },
-    cars: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CarProfile', required: true }]
+    cars: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CarProfile',
+        required: true,
+      },
+    ],
   },
-  { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-schema.pre("save", function (next) {
+schema.pre('save', function (next) {
   const user = this;
 
-  if (!user.isModified("password")) return next();
+  if (!user.isModified('password')) return next();
 
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
@@ -35,6 +42,6 @@ schema.methods.comparePassword = (password) => {
   return bcrypt.compareSync(password, this.password);
 };
 
-const User = mongoose.model("User", schema);
+const User = mongoose.model('User', schema);
 
 module.exports = User;

@@ -1,4 +1,4 @@
-const { Brand } = require("../mongo");
+const { Brand } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Brand.find()
@@ -11,7 +11,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Brand.findById(id)
     .then((brand) => {
       res.status(200).json(brand);
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const data = req.body;
   Brand.findByIdAndUpdate(id, data)
     .then((brand) => {
@@ -47,7 +47,7 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   Brand.findByIdAndRemove(id)
     .then((brand) => {
       res.status(200).json(brand);
