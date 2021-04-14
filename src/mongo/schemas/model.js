@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
@@ -6,12 +6,12 @@ const schema = new mongoose.Schema(
     brand: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Brand",
+      ref: 'Brand',
     },
   },
-  { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-const Model = mongoose.model("Model", schema);
+const Model = mongoose.model('Model', schema);
 
 module.exports = Model;
