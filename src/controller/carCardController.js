@@ -40,18 +40,6 @@ exports.createCarCard = (req, res) => {
     return res.status(200).json({ CarCard });
   });
 };
-/* exports.create = (req, res) => {
-  const data = req.body;
-  const newCarCard = new CarCard(data);
-  newCarCard
-    .save()
-    .then((carCard) => {
-      res.status(200).json(carCard);
-    })
-    .catch((error) => {
-      res.status(500).json(error);
-    });
-}; */
 
 exports.updateCarCard = (req, res) => {
   const { id } = req.params;
