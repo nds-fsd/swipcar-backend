@@ -13,7 +13,34 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const { id } = req.params;
   CarProfile.findById(id)
-    .populate('carCard')
+    .populate({
+      path: 'carCard',
+      populate: { path: 'brand' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'model' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'lowerprice' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'fuel' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'ecomark' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'photocar' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'transmision' },
+    })
     .populate('carType')
     .populate('equipments')
     .populate('rentingoptions')

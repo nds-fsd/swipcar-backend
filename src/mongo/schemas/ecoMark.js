@@ -1,12 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
     ecomarktype: { type: String, required: true, unique: true },
   },
-  { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-const EcoMark = mongoose.model("EcoMark", schema);
+const EcoMark = mongoose.model('EcoMark', schema);
 
 module.exports = EcoMark;

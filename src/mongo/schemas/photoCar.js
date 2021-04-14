@@ -1,17 +1,22 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    model: {
+    /* model: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Models",
-    },
+      ref: 'Models',
+    }, */
     photourl: { type: String, required: true },
+    carcard: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'CarCard',
+    },
   },
-  { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
+  { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-const PhotoCar = mongoose.model("PhotoCar", schema);
+const PhotoCar = mongoose.model('PhotoCar', schema);
 
 module.exports = PhotoCar;

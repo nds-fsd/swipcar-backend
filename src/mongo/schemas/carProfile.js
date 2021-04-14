@@ -22,7 +22,6 @@ const schema = new mongoose.Schema(
     motor: { type: Number, required: true },
     cilindrada: { type: String, required: true },
     consumo: { type: Number, required: true },
-    distintivo: { type: String },
     emision: { type: Number, required: true },
     equipments: [
       {

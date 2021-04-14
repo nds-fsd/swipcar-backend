@@ -1,16 +1,16 @@
-const express = require("express");
-const { CarCardController } = require("../controller");
+const express = require('express');
+const { CarCardController } = require('../controller');
 
 const CarCardRouter = express.Router();
 
-CarCardRouter.get("/", CarCardController.findAll);
+CarCardRouter.get('/', CarCardController.findAll);
 
-CarCardRouter.get("/:id", CarCardController.findOne);
+CarCardRouter.get('/:id', CarCardController.findOne);
 
-CarCardRouter.post("/", CarCardController.create);
+CarCardRouter.post('/', CarCardController.createCarCard);
 
-CarCardRouter.put("/:id", CarCardController.update);
+CarCardRouter.put('/:id', CarCardController.updateCarCard);
 
-CarCardRouter.delete("/:id", CarCardController.delete);
+CarCardRouter.delete('/:id', CarCardController.deleteCarCard);
 
 module.exports = { CarCardRouter };
