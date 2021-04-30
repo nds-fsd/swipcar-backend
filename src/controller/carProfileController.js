@@ -59,35 +59,6 @@ exports.createCarProfile = (req, res) => {
     return res.status(200).json({ CarProfile });
   });
 };
-/* Prueba result.ops for each
-exports.createCarProfile = (req, res) => {
-    const data = req.body;
-    const newCarProfile = new CarProfile(data);
-    newCarProfile.save((err, carProfilePersisted) => {
-        if(err) return res.status(500).json({error: err.getMessage()});
-        
-        const equipments = [1,2,3].map((num) => {
-            const newEquipment = new Equipment({
-              equipment: `equipment${num}`,
-              carprofile: carProfilePersisted._id
-            });
-            return newEquipment;
-        });
-    
-        Equipment.collection.insertMany(equipments, (err, result) => {
-            if(err) return res.status(500).json({error: err.getMessage()});
-            result.ops.forEach(equipment => {
-                carProfilePersisted.equipments.push(equipment._id);
-            });
-            carProfilePersisted.save((err, carProfileWithEquipment) =>{
-                return res.status(200).json({
-                  carprofile: carProfileWithEquipment,
-                  equipments: result.ops
-                });
-            });
-        });
-    });
-}; */
 
 exports.updateCarProfile = (req, res) => {
   const { id } = req.params;

@@ -1,22 +1,16 @@
+/* eslint-disable func-names */
 /* eslint-disable prefer-arrow-callback */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const schema = new mongoose.Schema(
   {
+    companyname: { type: String },
+    name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    name: { type: String, required: true },
-    direccion: { type: String, required: true },
-    phone: { type: String, required: true },
-    url: { type: String, required: true },
-    cars: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'CarProfile',
-        required: true,
-      },
-    ],
+    role: { type: String, required: true },
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
@@ -38,8 +32,25 @@ schema.pre('save', function (next) {
   });
 });
 
-schema.methods.comparePassword = (password) => {
+schema.methods.comparePassword = function (password) {
   return bcrypt.compareSync(password, this.password);
+};
+
+schema.methods.generateJWT = function () {
+  const today = new Date();
+  const expirationDate = new Date();
+  expirationDate.setDate(today.getDate() + 60);
+
+  let payload = {
+    id: this._id,
+    email: this.email,
+    name: this.name,
+    role: this.role,
+  };
+
+  return jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: parseInt(expirationDate.getTime() / 1000, 10),
+  });
 };
 
 const User = mongoose.model('User', schema);
