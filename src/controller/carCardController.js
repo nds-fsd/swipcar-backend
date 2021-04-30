@@ -32,6 +32,7 @@ exports.findOne = (req, res) => {
       return res.status(200).json(carCard);
     });
 };
+
 exports.createCarCard = (req, res) => {
   const data = req.body;
   const newCarCard = new CarCard(data);
@@ -63,3 +64,20 @@ exports.deleteCarCard = (req, res) => {
       res.status(500).json(error);
     });
 };
+
+
+// exports.dashboardTable = (req, res) => {
+//   CarCard.find()
+//     .populate('brand')
+//     .populate('model.modelname')
+//     .populate('lowerprice')
+//     .populate('fuel')
+//     .populate('ecomark')
+//     .populate('photocar')
+//     .populate('transmision')
+//     .populate('carprofile')
+//     .exec((err, carCard) => {
+//       if (err) return res.status(500).json({ error: err.getMessage() });
+//       return res.status(200).json(carCard);
+//     });
+// };

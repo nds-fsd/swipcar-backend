@@ -10,6 +10,39 @@ exports.findAll = (req, res) => {
     });
 };
 
+
+exports.getDataOptions = (req, res) => {
+
+  const page = Math.max(0, req.body.skip);
+  const limit = req.body.limit ? Math.max(1, req.body.limit) : 5;
+  const sort = req.body.sort;
+  const sortDirection = req.body.dir || 'asc';
+  let sortObject = {};
+  if (sort && sortDirection) {
+    sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
+  }
+  CarProfile.find()
+  .limit(limit)
+  .skip(page)
+  .sort(sortObject)
+  .populate({
+    path: 'carCard',
+    populate: { path: 'brand' },
+  })
+  .populate({
+    path: 'carCard',
+    populate: { path: 'model' },
+  })
+  .populate({
+    path: 'carCard',
+    populate: { path: 'fuel' },
+  })
+    .exec((err, carProfiles) => {
+      if (err) return res.status(500).json({ error: err.getMessage() });
+      return res.status(200).json(carProfiles);
+    });
+};
+
 exports.findOne = (req, res) => {
   const { id } = req.params;
   CarProfile.findById(id)

@@ -13,6 +13,8 @@ const {
   Fuel,
   EcoMark,
   Transmision,
+  Color,
+  Puertas,
   LowerPrice,
   PhotoCar,
 } = require('../mongo');
@@ -27,6 +29,8 @@ const { ModelRouter } = require('./modelRouter');
 const { FuelRouter } = require('./fuelRouter');
 const { EcoMarkRouter } = require('./ecoMarkRouter');
 const { TransmisionRouter } = require('./transmisionRouter');
+const { ColorRouter } = require('./colorRouter');
+const { PuertasRouter } = require('./puertasRouter');
 const { LowerPriceRouter } = require('./lowerPriceRouter');
 const { PhotoCarRouter } = require('./photoCarRouter');
 const { CarCardRouter } = require('./carCardRouter');
@@ -44,6 +48,8 @@ appRouter.use('/model', ModelRouter);
 appRouter.use('/fuel', FuelRouter);
 appRouter.use('/ecomark', EcoMarkRouter);
 appRouter.use('/transmision', TransmisionRouter);
+appRouter.use('/color', ColorRouter);
+appRouter.use('/puertas', PuertasRouter);
 appRouter.use('/lowerprice', LowerPriceRouter);
 appRouter.use('/photocar', PhotoCarRouter);
 appRouter.use('/carcard', CarCardRouter);

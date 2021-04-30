@@ -21,6 +21,17 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.findByBrand = (req, res) => {
+  const { id } = req.params;
+  Model.find({brand: id})
+    .then((model) => {
+      res.status(200).json(model);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+};
+
 exports.create = (req, res) => {
   const data = req.body;
   const newModel = new Model(data);
