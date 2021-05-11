@@ -10,9 +10,19 @@ exports.findAll = (req, res) => {
     });
 };
 
+exports.findAllLength = (req, res) => {
+  CarProfile.find().count()
+    .then((CarProfiles) => {
+      res.status(200).json(CarProfiles);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+};
 
-exports.getDataOptions = (req, res) => {
 
+
+exports.getDataOptions = async (req, res) => {
   const page = Math.max(0, req.body.skip);
   const limit = req.body.limit ? Math.max(1, req.body.limit) : 5;
   const sort = req.body.sort;
@@ -21,10 +31,14 @@ exports.getDataOptions = (req, res) => {
   if (sort && sortDirection) {
     sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
   }
+
+  const totalElements = await CarProfile.find().count()
+
   CarProfile.find()
+  // CarProfile.find({ dataSearch: 'Gasolina' }) //! queryy de busqueda
+  .sort(sortObject)
   .limit(limit)
   .skip(page)
-  .sort(sortObject)
   .populate({
     path: 'carCard',
     populate: { path: 'brand' },
@@ -39,8 +53,10 @@ exports.getDataOptions = (req, res) => {
   })
     .exec((err, carProfiles) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfiles);
+      const result = {elements: carProfiles, totalPages: totalElements }
+      return res.status(200).json(result);
     });
+
 };
 
 exports.findOne = (req, res) => {
@@ -85,7 +101,9 @@ exports.findOne = (req, res) => {
 };
 
 exports.createCarProfile = (req, res) => {
+
   const data = req.body;
+  console.log('data  : ', data);
   const newCarProfile = new CarProfile(data);
   newCarProfile.save((err, CarProfile) => {
     if (err) return res.status(500).json({ error: err.getMessage() });

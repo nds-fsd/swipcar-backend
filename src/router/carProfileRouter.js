@@ -7,6 +7,8 @@ CarProfileRouter.get("/", CarProfileController.findAll);
 
 CarProfileRouter.post("/dataoptions", CarProfileController.getDataOptions);
 
+CarProfileRouter.get("/lengthData", CarProfileController.findAllLength);
+
 CarProfileRouter.get("/:id", CarProfileController.findOne);
 
 CarProfileRouter.post("/", CarProfileController.createCarProfile);

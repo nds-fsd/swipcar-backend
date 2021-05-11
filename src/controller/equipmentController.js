@@ -2,8 +2,8 @@ const { Equipment } = require("../mongo");
 
 exports.findAll = (req, res) => {
   Equipment.find()
-    .then((Equipments) => {
-      res.status(200).json(Equipments);
+    .then((equipments) => {
+      res.status(200).json(equipments);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -13,8 +13,8 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const { id } = req.params;
   Equipment.findById(id)
-    .then((Equipment) => {
-      res.status(200).json(Equipment);
+    .then((equipment) => {
+      res.status(200).json(equipment);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -26,8 +26,8 @@ exports.createEquipment = (req, res) => {
   const newEquipment = new Equipment(data);
   newEquipment
     .save()
-    .then((Equipment) => {
-      res.status(200).json({ Equipment });
+    .then((equipment) => {
+      res.status(200).json({ equipment });
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -38,8 +38,8 @@ exports.updateEquipment = (req, res) => {
   const { id } = req.params;
   const data = req.body;
   Equipment.findByIdAndUpdate(id, data)
-    .then((Equipment) => {
-      res.status(200).json(Equipment);
+    .then((equipment) => {
+      res.status(200).json(equipment);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -49,10 +49,10 @@ exports.updateEquipment = (req, res) => {
 exports.deleteEquipment = (req, res) => {
   const { id } = req.params;
   Equipment.findByIdAndRemove(id)
-    .then((Equipment) => {
+    .then((equipment) => {
       res
         .status(200)
-        .json({ message: `${Equipment.equipment} has been deleted` });
+        .json({ message: `${equipment.equipment} has been deleted` });
     })
     .catch((error) => {
       res.status(500).json(error);

@@ -8,6 +8,7 @@ const RentingOption = require('./schemas/rentingOption.js');
 const CarCard = require('./schemas/carCard.js');
 const Brand = require('./schemas/brand.js');
 const Model = require('./schemas/model.js');
+const CarVersion = require('./schemas/carVersion.js');
 const Fuel = require('./schemas/fuel.js');
 const EcoMark = require('./schemas/ecoMark.js');
 const Transmision = require('./schemas/transmision');
@@ -26,6 +27,7 @@ module.exports = {
   CarCard,
   Brand,
   Model,
+  CarVersion,
   Fuel,
   EcoMark,
   Transmision,

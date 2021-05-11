@@ -7,6 +7,7 @@ const RentingOptionController = require('./rentingOptionController');
 const CarCardController = require('./carCardController');
 const BrandController = require('./brandController');
 const ModelController = require('./modelController');
+const VersionController = require('./versionController');
 const FuelController = require('./fuelController');
 const EcoMarkController = require('./ecoMarkController');
 const TransmisionController = require('./transmisionController');
@@ -25,6 +26,7 @@ module.exports = {
   CarCardController,
   BrandController,
   ModelController,
+  VersionController,
   FuelController,
   EcoMarkController,
   TransmisionController,

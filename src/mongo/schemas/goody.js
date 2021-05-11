@@ -2,18 +2,8 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    sinentrada: { type: Boolean, required: true },
-    asistencia: { type: Boolean, required: true },
-    mantenimiento: { type: Boolean, required: true },
-    averias: { type: Boolean, required: true },
-    impuestos: { type: Boolean, required: true },
-    neumaticos: { type: Boolean, required: true },
-    preentrega: { type: Boolean, required: true },
-    sustitucion: { type: Boolean, required: true },
-    seguroconfranquicia: { type: Boolean, required: true },
-    segurosinfranquicia: { type: Boolean, required: true },
-    franquicia: { type: Number, required: true },
-    goody: { type: String, required: true },
+    carGoodie: { type: String, required: true, unique: true },
+    iconGoodie: { type: String, required: true, default: 'check' }
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );

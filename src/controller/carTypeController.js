@@ -2,8 +2,8 @@ const { CarType } = require('../mongo');
 
 exports.findAll = (req, res) => {
   CarType.find()
-    .then((CarTypes) => {
-      res.status(200).json(CarTypes);
+    .then((carTypes) => {
+      res.status(200).json(carTypes);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -13,8 +13,8 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const { id } = req.params;
   CarType.findById(id)
-    .then((CarType) => {
-      res.status(200).json(CarType);
+    .then((carType) => {
+      res.status(200).json(carType);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -26,8 +26,8 @@ exports.createCarType = (req, res) => {
   const newCarType = new CarType(data);
   newCarType
     .save()
-    .then((CarType) => {
-      res.status(200).json({ CarType });
+    .then((carType) => {
+      res.status(200).json({ carType });
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -38,8 +38,8 @@ exports.updateCarType = (req, res) => {
   const { id } = req.params;
   const data = req.body;
   CarType.findByIdAndUpdate(id, data)
-    .then((CarType) => {
-      res.status(200).json(CarType);
+    .then((carType) => {
+      res.status(200).json(carType);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -49,8 +49,8 @@ exports.updateCarType = (req, res) => {
 exports.deleteCarType = (req, res) => {
   const { id } = req.params;
   CarType.findByIdAndRemove(id)
-    .then((CarType) => {
-      res.status(200).json({ message: `${CarType.carType} has been deleted` });
+    .then((carType) => {
+      res.status(200).json({ message: `${carType.carType} has been deleted` });
     })
     .catch((error) => {
       res.status(500).json(error);

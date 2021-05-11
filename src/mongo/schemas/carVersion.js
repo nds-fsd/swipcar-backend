@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    modelname: { type: String, required: true, unique: true, index: true },
-    brand: {
+    carVersion: { type: String, required: true, unique: true, index: true },
+    carModel: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'Model',
       required: true,
-      ref: 'Brand',
     },
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-const Model = mongoose.model('Model', schema);
+const CarVersion = mongoose.model('CarVersion', schema);
 
-module.exports = Model;
+module.exports = CarVersion;
