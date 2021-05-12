@@ -1,9 +1,9 @@
-const { Model } = require('../mongo');
+const { CarVersion } = require('../mongo');
 
 exports.findAll = (req, res) => {
-  Model.find()
-    .then((models) => {
-      res.status(200).json(models);
+  CarVersion.find()
+    .then((versiones) => {
+      res.status(200).json(versiones);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,20 +12,20 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
-  Model.findById(id)
-    .then((model) => {
-      res.status(200).json(model);
+  CarVersion.findById(id)
+    .then((version) => {
+      res.status(200).json(version);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.findByBrand = (req, res) => {
+exports.findByModel = (req, res) => {
   const { id } = req.params;
-  Model.find({brand: id})
-    .then((model) => {
-      res.status(200).json(model);
+  CarVersion.find({carModel: id})
+    .then((version) => {
+      res.status(200).json(version);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -34,11 +34,11 @@ exports.findByBrand = (req, res) => {
 
 exports.create = (req, res) => {
   const data = req.body;
-  const newModel = new Model(data);
-  newModel
+  const newCarVersion = new CarVersion(data);
+  newCarVersion
     .save()
-    .then((model) => {
-      res.status(200).json(model);
+    .then((version) => {
+      res.status(200).json(version);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -48,9 +48,9 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  Model.findByIdAndUpdate(id, data)
-    .then((model) => {
-      res.status(200).json(model);
+  CarVersion.findByIdAndUpdate(id, data)
+    .then((version) => {
+      res.status(200).json(version);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -59,9 +59,9 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const { id } = req.params;
-  Model.findByIdAndRemove(id)
-    .then((model) => {
-      res.status(200).json(model);
+  CarVersion.findByIdAndRemove(id)
+    .then((version) => {
+      res.status(200).json(version);
     })
     .catch((error) => {
       res.status(500).json(error);

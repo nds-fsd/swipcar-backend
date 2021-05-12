@@ -10,6 +10,6 @@ const schema = new mongoose.Schema(
   { timestamps: { createdAt: "createdAt", updatedAt: "updatedAt" } }
 );
 
-const RentingOption = mongoose.model("RentingOption", schema);
 
-module.exports = RentingOption;
+
+exports.RentingOptionSchema = schema;
