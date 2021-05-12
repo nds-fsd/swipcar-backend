@@ -69,7 +69,15 @@ const configSecurity = (app) => {
   app.use(
     '/',
     jwtMiddleware({ secret: jwtSecret, algorithms: ['HS256'] }).unless({
-      path: ['/login', '/register', '/carcard', /^\/carprofile\/.*/],
+      path: [
+        '/login',
+        '/register',
+        '/carcard',
+        /^\/brand\/.*/,
+        /^\/fuel\/.*/,
+        /^\/transmision\/.*/,
+        /^\/carprofile\/.*/,
+      ],
     })
   );
 };
