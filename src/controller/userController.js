@@ -1,4 +1,4 @@
-const { User } = require("../mongo");
+const { User } = require('../mongo');
 
 exports.findAll = (req, res) => {
   User.find()
@@ -11,12 +11,12 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   User.findById(id)
     .populate('cars')
-    .exec((err, user) => {        
-        if(err) return res.status(500).json({error: err.getMessage()});
-        return res.status(200).json(user);
+    .exec((err, user) => {
+      if (err) return res.status(500).json({ error: err.getMessage() });
+      return res.status(200).json(user);
     });
 };
 exports.createUser = (req, res) => {
@@ -25,7 +25,7 @@ exports.createUser = (req, res) => {
   newUser
     .save()
     .then(() => {
-      res.status(200).json({ message: "user created" });
+      res.status(200).json({ message: 'user created' });
     })
     .catch((error) => {
       res.status(500).json(error);

@@ -61,7 +61,27 @@ const schema = new mongoose.Schema(
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
-
+schema.index({
+  carCard: 'text',
+  carType: 'text',
+  nuevo: 'text',
+  seminuevo: 'text',
+  furgoneta: 'text',
+  color: 'text',
+  puertas: 'text',
+  dimensiones: 'text',
+  motor: 'text',
+  cilindrada: 'text',
+  consumo: 'text',
+  emision: 'text',
+  equipments: 'text',
+  rentingOptions: 'text',
+  goodies: 'text',
+  tecnologia: 'text',
+  confort: 'text',
+  seguridad: 'text',
+  exterior: 'text',
+});
 const CarProfile = mongoose.model('CarProfile', schema);
 
 module.exports = CarProfile;
