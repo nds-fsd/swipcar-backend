@@ -13,4 +13,6 @@ CarCardRouter.put('/:id', CarCardController.updateCarCard);
 
 CarCardRouter.delete('/:id', CarCardController.deleteCarCard);
 
+CarCardRouter.post('/search', CarCardController.searchNewCars);
+
 module.exports = { CarCardRouter };
