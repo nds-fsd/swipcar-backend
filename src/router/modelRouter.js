@@ -9,6 +9,8 @@ ModelRouter.get("/:id", ModelController.findOne);
 
 ModelRouter.post("/", ModelController.create);
 
+ModelRouter.post("/bybrand/:id", ModelController.findByBrand);
+
 ModelRouter.put("/:id", ModelController.update);
 
 ModelRouter.delete("/:id", ModelController.delete);

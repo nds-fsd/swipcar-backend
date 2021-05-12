@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    carType: { type: String, required: true, unique: true, index: true }
+    label: { type: Number, required: true },
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
-  );
+);
 
-const CarType = mongoose.model('CarType', schema);
+const Puertas = mongoose.model('Puertas', schema);
 
-module.exports = CarType;
+module.exports = Puertas;

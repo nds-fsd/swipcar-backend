@@ -32,6 +32,7 @@ exports.findOne = (req, res) => {
       return res.status(200).json(carCard);
     });
 };
+
 exports.createCarCard = (req, res) => {
   const data = req.body;
   const newCarCard = new CarCard(data);

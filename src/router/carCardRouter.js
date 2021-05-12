@@ -5,6 +5,8 @@ const CarCardRouter = express.Router();
 
 CarCardRouter.get('/', CarCardController.findAll);
 
+// CarCardRouter.get('/dashboard', CarCardController.dashboardTable);
+
 CarCardRouter.get('/:id', CarCardController.findOne);
 
 CarCardRouter.post('/', CarCardController.createCarCard);
