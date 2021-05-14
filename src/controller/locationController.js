@@ -1,9 +1,9 @@
-const { Goody } = require('../mongo');
+const { Location } = require('../mongo');
 
 exports.findAll = (req, res) => {
-  Goody.find()
-    .then((goodys) => {
-      res.status(200).json(goodys);
+  Location.find()
+    .then((locations) => {
+      res.status(200).json(locations);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,52 +12,52 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
-  Goody.findById(id)
-    .then((goody) => {
-      res.status(200).json(goody);
+  Location.findById(id)
+    .then((location) => {
+      res.status(200).json(location);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.createGoody = (req, res) => {
+exports.createLocation = (req, res) => {
   const data = req.body;
-  const newGoody = new Goody(data);
-  newGoody
+  const newLocation = new Location(data);
+  newLocation
     .save()
-    .then((goody) => {
-      res.status(200).json({ goody });
+    .then((location) => {
+      res.status(200).json(location);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.updateGoody = (req, res) => {
+exports.updateLocation = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  Goody.findByIdAndUpdate(id, data)
-    .then((goody) => {
-      res.status(200).json(goody);
+  Location.findByIdAndUpdate(id, data)
+    .then((location) => {
+      res.status(200).json(location);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.deleteGoody = (req, res) => {
+exports.deleteLocation = (req, res) => {
   const { id } = req.params;
-  Goody.findByIdAndRemove(id)
-    .then((goody) => {
-      res.status(200).json({ message: `${goody.goody} has been deleted` });
+  Location.findByIdAndRemove(id)
+    .then((location) => {
+      res.status(200).json(location);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.searchGoody = (req, res) => {
+exports.searchLocation = (req, res) => {
   const searchTextReg = req.body.search
     .split(' ')
     .reduce((acc, curr) => `${acc}.*${curr}`, '');
@@ -68,7 +68,7 @@ exports.searchGoody = (req, res) => {
     $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
   };
 
-  Goody.find(query)
+  Location.find(query)
     .then((objects) => {
       res.status(200).json(objects);
     })

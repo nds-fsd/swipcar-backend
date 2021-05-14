@@ -15,6 +15,10 @@ const PuertasController = require('./puertasController');
 const ColorController = require('./colorController');
 const LowerPriceController = require('./lowerPriceController');
 const PhotoCarController = require('./photoCarController');
+const LocationController = require('./locationController');
+const ProviderController = require('./providerController');
+const ReservationController = require('./reservationController');
+const RentingOfferController = require('./rentingOfferController');
 
 module.exports = {
   UserController,
@@ -34,4 +38,8 @@ module.exports = {
   ColorController,
   LowerPriceController,
   PhotoCarController,
+  LocationController,
+  ProviderController,
+  ReservationController,
+  RentingOfferController,
 };

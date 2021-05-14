@@ -41,7 +41,8 @@ exports.findAll = (req, res) => {
 };
 
 exports.findAllLength = (req, res) => {
-  CarProfile.find().count()
+  CarProfile.find()
+    .count()
     .then((CarProfiles) => {
       res.status(200).json(CarProfiles);
     })
@@ -50,43 +51,40 @@ exports.findAllLength = (req, res) => {
     });
 };
 
-
-
 exports.getDataOptions = async (req, res) => {
   const page = Math.max(0, req.body.skip);
   const limit = req.body.limit ? Math.max(1, req.body.limit) : 5;
-  const sort = req.body.sort;
+  const { sort } = req.body;
   const sortDirection = req.body.dir || 'asc';
   let sortObject = {};
   if (sort && sortDirection) {
     sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
   }
 
-  const totalElements = await CarProfile.find().count()
+  const totalElements = await CarProfile.find().count();
 
   CarProfile.find()
-  // CarProfile.find({ dataSearch: 'Gasolina' }) //! queryy de busqueda
-  .sort(sortObject)
-  .limit(limit)
-  .skip(page)
-  .populate({
-    path: 'carCard',
-    populate: { path: 'brand' },
-  })
-  .populate({
-    path: 'carCard',
-    populate: { path: 'model' },
-  })
-  .populate({
-    path: 'carCard',
-    populate: { path: 'fuel' },
-  })
+    // CarProfile.find({ dataSearch: 'Gasolina' }) //! queryy de busqueda
+    .sort(sortObject)
+    .limit(limit)
+    .skip(page)
+    .populate({
+      path: 'carCard',
+      populate: { path: 'brand' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'model' },
+    })
+    .populate({
+      path: 'carCard',
+      populate: { path: 'fuel' },
+    })
     .exec((err, carProfiles) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      const result = {elements: carProfiles, totalPages: totalElements }
+      const result = { elements: carProfiles, totalPages: totalElements };
       return res.status(200).json(result);
     });
-
 };
 
 exports.findOne = (req, res) => {
@@ -131,7 +129,6 @@ exports.findOne = (req, res) => {
 };
 
 exports.createCarProfile = (req, res) => {
-
   const data = req.body;
   console.log('data  : ', data);
   const newCarProfile = new CarProfile(data);
