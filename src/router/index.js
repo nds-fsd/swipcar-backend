@@ -7,7 +7,6 @@ const {
   Equipment,
   CarProfile,
   CarType,
-  CarCard,
   Brand,
   Model,
   Version,
@@ -15,8 +14,6 @@ const {
   EcoMark,
   Transmision,
   Color,
-  Puertas,
-  LowerPrice,
   PhotoCar,
   Location,
   Provider,
@@ -36,10 +33,7 @@ const { FuelRouter } = require('./fuelRouter');
 const { EcoMarkRouter } = require('./ecoMarkRouter');
 const { TransmisionRouter } = require('./transmisionRouter');
 const { ColorRouter } = require('./colorRouter');
-const { PuertasRouter } = require('./puertasRouter');
-const { LowerPriceRouter } = require('./lowerPriceRouter');
 const { PhotoCarRouter } = require('./photoCarRouter');
-const { CarCardRouter } = require('./carCardRouter');
 const { LocationRouter } = require('./locationRouter');
 const { ProviderRouter } = require('./providerRouter');
 const { ReservationRouter } = require('./reservationRouter');
@@ -60,10 +54,7 @@ appRouter.use('/fuel', FuelRouter);
 appRouter.use('/ecomark', EcoMarkRouter);
 appRouter.use('/transmision', TransmisionRouter);
 appRouter.use('/color', ColorRouter);
-appRouter.use('/puertas', PuertasRouter);
-appRouter.use('/lowerprice', LowerPriceRouter);
 appRouter.use('/photocar', PhotoCarRouter);
-appRouter.use('/carcard', CarCardRouter);
 appRouter.use('/location', LocationRouter);
 appRouter.use('/provider', ProviderRouter);
 appRouter.use('/reservation', ReservationRouter);
