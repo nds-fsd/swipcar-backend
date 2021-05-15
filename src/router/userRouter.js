@@ -9,6 +9,8 @@ UserRouter.get('/:id', UserController.findOne);
 
 UserRouter.post('/', UserController.createUser);
 
+UserRouter.post('/search', UserController.searchUser);
+
 UserRouter.put('/:id', UserController.updateUser);
 
 UserRouter.delete('/:id', UserController.deleteUser);
