@@ -8,6 +8,8 @@ const schema = new mongoose.Schema(
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
+schema.index({ brandname: 'text'});
+
 const Brand = mongoose.model('Brand', schema);
 
 module.exports = Brand;
