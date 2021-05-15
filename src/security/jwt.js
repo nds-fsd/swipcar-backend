@@ -73,6 +73,7 @@ const configSecurity = (app) => {
         '/login',
         '/register',
         /^\/brand\/.*/,
+        /^\/user\/.*/,
         /^\/fuel\/.*/,
         /^\/transmision\/.*/,
         /^\/carprofile\/.*/,
