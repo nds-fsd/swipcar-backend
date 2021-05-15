@@ -72,8 +72,8 @@ const configSecurity = (app) => {
       path: [
         '/login',
         '/register',
-        '/carcard',
         /^\/brand\/.*/,
+        /^\/user\/.*/,
         /^\/fuel\/.*/,
         /^\/transmision\/.*/,
         /^\/carprofile\/.*/,

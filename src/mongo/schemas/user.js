@@ -6,14 +6,29 @@ const jwt = require('jsonwebtoken');
 
 const schema = new mongoose.Schema(
   {
-    companyname: { type: String },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true },
+    location: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Location',
+    },
+    provider: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Provider',
+    },
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
+
+schema.index({
+  name: 'text',
+  email: 'text',
+  role: 'text',
+  location: 'text',
+  provider: 'text',
+});
 
 schema.pre('save', function (next) {
   const user = this;
