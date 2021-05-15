@@ -2,11 +2,13 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
   {
-    label: { type: String, required: true },
-    color: { type: String, required: true },
+    colorname: { type: String, required: true },
+    color: { type: String, required: true }
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
+
+schema.index({ colorname: 'text' });
 
 const Color = mongoose.model('Color', schema);
 
