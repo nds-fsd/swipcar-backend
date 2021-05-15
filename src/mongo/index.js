@@ -4,7 +4,6 @@ const CarProfile = require('./schemas/CarProfile.js');
 const CarType = require('./schemas/CarType.js');
 const Equipment = require('./schemas/equipment.js');
 const Goody = require('./schemas/goody.js');
-const RentingOption = require('./schemas/rentingOption.js');
 const Brand = require('./schemas/Brand.js');
 const Model = require('./schemas/Model.js');
 const CarVersion = require('./schemas/CarVersion.js');
@@ -20,7 +19,6 @@ module.exports = {
   CarType,
   Equipment,
   Goody,
-  RentingOption,
   Brand,
   Model,
   CarVersion,

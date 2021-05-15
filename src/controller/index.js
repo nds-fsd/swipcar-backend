@@ -3,7 +3,6 @@ const CarProfileController = require('./carProfileController');
 const CarTypeController = require('./carTypeController');
 const EquipmentController = require('./equipmentController');
 const GoodyController = require('./goodyController');
-const RentingOptionController = require('./rentingOptionController');
 const BrandController = require('./brandController');
 const ModelController = require('./modelController');
 const VersionController = require('./versionController');
@@ -19,7 +18,6 @@ module.exports = {
   CarTypeController,
   EquipmentController,
   GoodyController,
-  RentingOptionController,
   BrandController,
   ModelController,
   VersionController,
