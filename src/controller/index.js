@@ -12,6 +12,10 @@ const EcoMarkController = require('./ecoMarkController');
 const TransmisionController = require('./transmisionController');
 const ColorController = require('./colorController');
 const PhotoCarController = require('./photoCarController');
+const LocationController = require('./locationController');
+const ProviderController = require('./providerController');
+const ReservationController = require('./reservationController');
+const RentingOfferController = require('./rentingOfferController');
 
 module.exports = {
   UserController,
@@ -28,4 +32,8 @@ module.exports = {
   TransmisionController,
   ColorController,
   PhotoCarController,
+  LocationController,
+  ProviderController,
+  ReservationController,
+  RentingOfferController,
 };

@@ -1,9 +1,9 @@
-const { User } = require('../mongo');
+const { Provider } = require('../mongo');
 
 exports.findAll = (req, res) => {
-  User.find()
-    .populate('location')
-    .populate('provider')
+  Provider.find()
+    .populate('rentingOffers')
+    .populate('reservations')
     .exec((err, carProfile) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
       return res.status(200).json(carProfile);
@@ -12,51 +12,52 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
-  User.findById(id)
-    .populate('location')
-    .populate('provider')
-    .exec((err, user) => {
+  Provider.findById(id)
+    .populate('rentingOffers')
+    .populate('reservations')
+    .exec((err, carProfile) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(user);
+      return res.status(200).json(carProfile);
     });
 };
-exports.createUser = (req, res) => {
+
+exports.createProvider = (req, res) => {
   const data = req.body;
-  const newUser = new User(data);
-  newUser
+  const newProvider = new Provider(data);
+  newProvider
     .save()
-    .then(() => {
-      res.status(200).json({ message: 'user created' });
+    .then((provider) => {
+      res.status(200).json(provider);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.updateUser = (req, res) => {
+exports.updateProvider = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  User.findByIdAndUpdate(id, data)
-    .then((user) => {
-      res.status(200).json(user);
+  Provider.findByIdAndUpdate(id, data)
+    .then((provider) => {
+      res.status(200).json(provider);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.deleteUser = (req, res) => {
+exports.deleteProvider = (req, res) => {
   const { id } = req.params;
-  User.findByIdAndRemove(id)
-    .then((user) => {
-      res.status(200).json({ message: `${user.name} has been deleted` });
+  Provider.findByIdAndRemove(id)
+    .then((provider) => {
+      res.status(200).json(provider);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.searchUser = (req, res) => {
+exports.searchProvider = (req, res) => {
   const searchTextReg = req.body.search
     .split(' ')
     .reduce((acc, curr) => `${acc}.*${curr}`, '');
@@ -67,7 +68,7 @@ exports.searchUser = (req, res) => {
     $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
   };
 
-  User.find(query)
+  Provider.find(query)
     .then((objects) => {
       res.status(200).json(objects);
     })

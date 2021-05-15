@@ -1,9 +1,9 @@
-const { Goody } = require('../mongo');
+const { Reservation } = require('../mongo');
 
 exports.findAll = (req, res) => {
-  Goody.find()
-    .then((goodys) => {
-      res.status(200).json(goodys);
+  Reservation.find()
+    .then((reservations) => {
+      res.status(200).json(reservations);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,52 +12,52 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
-  Goody.findById(id)
-    .then((goody) => {
-      res.status(200).json(goody);
+  Reservation.findById(id)
+    .then((reservation) => {
+      res.status(200).json(reservation);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.createGoody = (req, res) => {
+exports.createReservation = (req, res) => {
   const data = req.body;
-  const newGoody = new Goody(data);
-  newGoody
+  const newReservation = new Reservation(data);
+  newReservation
     .save()
-    .then((goody) => {
-      res.status(200).json({ goody });
+    .then((reservation) => {
+      res.status(200).json(reservation);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.updateGoody = (req, res) => {
+exports.updateReservation = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  Goody.findByIdAndUpdate(id, data)
-    .then((goody) => {
-      res.status(200).json(goody);
+  Reservation.findByIdAndUpdate(id, data)
+    .then((reservation) => {
+      res.status(200).json(reservation);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.deleteGoody = (req, res) => {
+exports.deleteReservation = (req, res) => {
   const { id } = req.params;
-  Goody.findByIdAndRemove(id)
-    .then((goody) => {
-      res.status(200).json({ message: `${goody.goody} has been deleted` });
+  Reservation.findByIdAndRemove(id)
+    .then((reservation) => {
+      res.status(200).json(reservation);
     })
     .catch((error) => {
       res.status(500).json(error);
     });
 };
 
-exports.searchGoody = (req, res) => {
+exports.searchReservation = (req, res) => {
   const searchTextReg = req.body.search
     .split(' ')
     .reduce((acc, curr) => `${acc}.*${curr}`, '');
@@ -68,7 +68,7 @@ exports.searchGoody = (req, res) => {
     $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
   };
 
-  Goody.find(query)
+  Reservation.find(query)
     .then((objects) => {
       res.status(200).json(objects);
     })
