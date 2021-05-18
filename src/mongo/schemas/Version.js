@@ -6,35 +6,35 @@ const schema = new mongoose.Schema(
     model: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Model',
-      required: true
+      required: true,
     },
     color: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Color',
-        required: true
-      }
+        required: true,
+      },
     ],
     fuel: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Fuel',
-        required: true
-      }
+        required: true,
+      },
     ],
     transmision: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Transmision',
-        required: true
-      }
+        required: true,
+      },
     ],
     motor: { type: Number, required: true },
     displacement: { type: Number, required: true },
     ecomark: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'EcoMark',
-      required: true
+      required: true,
     },
     emission: { type: Number, required: true },
     comsumption: { type: Number, required: true },
@@ -46,13 +46,20 @@ const schema = new mongoose.Schema(
     technologies: [{ type: String }],
     conforts: [{ type: String }],
     securities: [{ type: String }],
-    exteriors: [{ type: String }]
+    exteriors: [{ type: String }],
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );
 
-schema.index({ version: 'text' });
+schema.index({
+  version: 'text',
+  model: 'text',
+  color: 'text',
+  fuel: 'text',
+  transmision: 'text',
+  ecomark: 'text',
+});
 
-const CarVersion = mongoose.model('CarVersion', schema);
+const CarVersion = mongoose.model('Version', schema);
 
 module.exports = CarVersion;

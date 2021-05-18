@@ -4,9 +4,9 @@ exports.findAll = (req, res) => {
   User.find()
     .populate('location')
     .populate('provider')
-    .exec((err, carProfile) => {
+    .exec((err, Users) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(Users);
     });
 };
 

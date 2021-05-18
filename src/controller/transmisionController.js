@@ -2,8 +2,8 @@ const { Transmision } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Transmision.find()
-    .then((transmisiones) => {
-      res.status(200).json(transmisiones);
+    .then((transmisions) => {
+      res.status(200).json(transmisions);
     })
     .catch((error) => {
       res.status(500).json(error);
