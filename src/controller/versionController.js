@@ -1,9 +1,9 @@
-const { CarVersion } = require('../mongo');
+const { Version } = require('../mongo');
 
 exports.findAll = (req, res) => {
-  CarVersion.find()
-    .then((versiones) => {
-      res.status(200).json(versiones);
+  Version.find()
+    .then((versions) => {
+      res.status(200).json(versions);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -12,7 +12,7 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
-  CarVersion.findById(id)
+  Version.findById(id)
     .then((version) => {
       res.status(200).json(version);
     })
@@ -23,8 +23,8 @@ exports.findOne = (req, res) => {
 
 exports.create = (req, res) => {
   const data = req.body;
-  const newCarVersion = new CarVersion(data);
-  newCarVersion
+  const newVersion = new Version(data);
+  newVersion
     .save()
     .then((version) => {
       res.status(200).json(version);
@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 exports.update = (req, res) => {
   const { id } = req.params;
   const data = req.body;
-  CarVersion.findByIdAndUpdate(id, data)
+  Version.findByIdAndUpdate(id, data)
     .then((version) => {
       res.status(200).json(version);
     })
@@ -48,7 +48,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const { id } = req.params;
-  CarVersion.findByIdAndRemove(id)
+  Version.findByIdAndRemove(id)
     .then((version) => {
       res.status(200).json(version);
     })
@@ -60,7 +60,7 @@ exports.delete = (req, res) => {
 
 exports.findByModel = (req, res) => {
   const { id } = req.params;
-  CarVersion.find({model: id})
+  Version.find({ model: id })
     .then((version) => {
       res.status(200).json(version);
     })

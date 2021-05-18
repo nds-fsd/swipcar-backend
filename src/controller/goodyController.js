@@ -2,8 +2,8 @@ const { Goody } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Goody.find()
-    .then((goodys) => {
-      res.status(200).json(goodys);
+    .then((goodies) => {
+      res.status(200).json(goodies);
     })
     .catch((error) => {
       res.status(500).json(error);
