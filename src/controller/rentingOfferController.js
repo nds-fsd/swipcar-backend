@@ -5,9 +5,9 @@ exports.findAll = (req, res) => {
     .populate('carprofile')
     .populate('goodies')
     .populate('equipments')
-    .exec((err, carProfile) => {
+    .exec((err, rentingOffers) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(rentingOffers);
     });
 };
 
@@ -17,9 +17,9 @@ exports.findOne = (req, res) => {
     .populate('carprofile')
     .populate('goodies')
     .populate('equipments')
-    .exec((err, carProfile) => {
+    .exec((err, rentingOffer) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(rentingOffer);
     });
 };
 

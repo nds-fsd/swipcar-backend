@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
+  version: { type: Boolean, required: true },
   newcar: { type: Boolean, required: true },
   price: { type: String, required: true },
   km: { type: String, required: true },
@@ -27,6 +28,7 @@ const schema = new mongoose.Schema({
 });
 
 schema.index({
+  version: 'text',
   newcar: 'text',
   price: 'text',
   km: 'text',
