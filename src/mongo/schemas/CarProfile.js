@@ -17,7 +17,6 @@ const schema = new mongoose.Schema(
       ref: 'Version',
       required: true,
     },
-
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );

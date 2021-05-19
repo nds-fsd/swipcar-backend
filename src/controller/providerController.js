@@ -4,9 +4,9 @@ exports.findAll = (req, res) => {
   Provider.find()
     .populate('rentingOffers')
     .populate('reservations')
-    .exec((err, carProfile) => {
+    .exec((err, Providers) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(Providers);
     });
 };
 
@@ -15,9 +15,9 @@ exports.findOne = (req, res) => {
   Provider.findById(id)
     .populate('rentingOffers')
     .populate('reservations')
-    .exec((err, carProfile) => {
+    .exec((err, Provider) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(Provider);
     });
 };
 

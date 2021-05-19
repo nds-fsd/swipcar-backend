@@ -1,22 +1,54 @@
 const { CarProfile } = require('../mongo');
 
+/* exports.findAll = (req, res) => {
+  CarProfile.find()
+    .then((carProfiles) => {
+      res.status(200).json(carProfiles);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+}; */
 exports.findAll = (req, res) => {
   CarProfile.find()
+    .populate('brand')
+    .populate('model')
     .populate({
-      path: 'brand',
-      populate: { path: 'brand' }
+      path: 'model',
+      populate: { path: 'brand' },
     })
     .populate({
       path: 'model',
-      populate: { path: 'model' }
+      populate: { path: 'cartype' },
+    })
+    .populate({
+      path: 'model',
+      populate: { path: 'photocar' },
+    })
+    .populate('version')
+    .populate({
+      path: 'version',
+      populate: { path: 'model' },
     })
     .populate({
       path: 'version',
-      populate: { path: 'version' }
+      populate: { path: 'color' },
     })
-    .exec((err, carProfile) => {
+    .populate({
+      path: 'version',
+      populate: { path: 'fuel' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'transmision' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'ecomark' },
+    })
+    .exec((err, CarProfiles) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(CarProfiles);
     });
 };
 
@@ -71,17 +103,40 @@ exports.findAllLength = (req, res) => {
 exports.findOne = (req, res) => {
   const { id } = req.params;
   CarProfile.findById(id)
+    .populate('brand')
+    .populate('model')
     .populate({
-      path: 'brand',
-      populate: { path: 'brand' }
+      path: 'model',
+      populate: { path: 'brand' },
     })
     .populate({
       path: 'model',
-      populate: { path: 'model' }
+      populate: { path: 'cartype' },
+    })
+    .populate({
+      path: 'model',
+      populate: { path: 'photocar' },
+    })
+    .populate('version')
+    .populate({
+      path: 'version',
+      populate: { path: 'model' },
     })
     .populate({
       path: 'version',
-      populate: { path: 'version' }
+      populate: { path: 'color' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'fuel' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'transmision' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'ecomark' },
     })
     .exec((err, carProfile) => {
       if (err) return res.status(500).json({ error: err.getMessage() });

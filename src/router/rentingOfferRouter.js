@@ -7,9 +7,9 @@ RentingOfferRouter.get('/', RentingOfferController.findAll);
 
 RentingOfferRouter.get('/:id', RentingOfferController.findOne);
 
-RentingOfferRouter.post('/', RentingOfferController.createRentingOffer);
+/* RentingOfferRouter.post('/', RentingOfferController.createRentingOffer);
 
-RentingOfferRouter.post('/search', RentingOfferController.searchRentingOffer);
+RentingOfferRouter.post('/search', RentingOfferController.searchRentingOffer); */
 
 RentingOfferRouter.put('/:id', RentingOfferController.updateRentingOffer);
 
