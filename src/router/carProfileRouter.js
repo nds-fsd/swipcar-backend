@@ -5,7 +5,7 @@ const CarProfileRouter = express.Router();
 
 CarProfileRouter.get('/', CarProfileController.findAll);
 
-// CarProfileRouter.post("/dataoptions", CarProfileController.getDataOptions);
+CarProfileRouter.post("/dataoptions", CarProfileController.getDataCarProfiles);
 
 // CarProfileRouter.get("/lengthData", CarProfileController.findAllLength);
 

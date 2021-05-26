@@ -19,7 +19,7 @@ exports.findAll = (req, res) => {
     })
     .populate({
       path: 'model',
-      populate: { path: 'photocar' },
+      populate: { path: 'photocar' }
     })
     .populate('version')
     .populate({
@@ -32,19 +32,19 @@ exports.findAll = (req, res) => {
     })
     .populate({
       path: 'version',
-      populate: { path: 'color' },
+      populate: { path: 'color' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'fuel' },
+      populate: { path: 'fuel' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'transmision' },
+      populate: { path: 'transmision' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'ecomark' },
+      populate: { path: 'ecomark' }
     })
     .populate({
       path: 'version',
@@ -83,42 +83,32 @@ exports.findAllLength = (req, res) => {
     });
 };
 
-// exports.getDataOptions = async (req, res) => {
-//   const page = Math.max(0, req.body.skip);
-//   const limit = req.body.limit ? Math.max(1, req.body.limit) : 5;
-//   const { sort } = req.body;
-//   const sortDirection = req.body.dir || 'asc';
-//   let sortObject = {};
-//   if (sort && sortDirection) {
-//     sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
-//   }
+exports.getDataCarProfiles = async (req, res) => {
+  const page = Math.max(0, req.body.skip);
+  const limit = req.body.limit ? Math.max(1, req.body.limit) : 10;
+  const { sort } = req.body;
+  const sortDirection = req.body.dir || 'asc';
+  let sortObject = {};
+  if (sort && sortDirection) {
+    sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
+  }
 
-//   const totalElements = await CarProfile.find().count()
+  const totalElements = await CarProfile.find().count();
 
-//   CarProfile.find()
-//   // CarProfile.find({ dataSearch: 'Gasolina' }) //! queryy de busqueda
-//   .sort(sortObject)
-//   .limit(limit)
-//   .skip(page)
-//   .populate({
-//     path: 'carCard',
-//     populate: { path: 'brand' },
-//   })
-//   .populate({
-//     path: 'carCard',
-//     populate: { path: 'model' },
-//   })
-//   .populate({
-//     path: 'carCard',
-//     populate: { path: 'fuel' },
-//   })
-//     .exec((err, carProfiles) => {
-//       if (err) return res.status(500).json({ error: err.getMessage() });
-//       const result = {elements: carProfiles, totalPages: totalElements }
-//       return res.status(200).json(result);
-//     });
-
-// };
+  CarProfile.find()
+    // CarProfile.find({ brandname: 'Kia' }) //! queryy de busqueda
+    .sort(sortObject)
+    .limit(limit)
+    .skip(page)
+    .populate('brand')
+    .populate('model')
+    .populate('version')
+    .exec((err, carProfiles) => {
+      if (err) return res.status(500).json({ error: err.getMessage() });
+      const result = { elements: carProfiles, totalPages: totalElements };
+      return res.status(200).json(result);
+    });
+};
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
@@ -131,7 +121,7 @@ exports.findOne = (req, res) => {
     })
     .populate({
       path: 'model',
-      populate: { path: 'photocar' },
+      populate: { path: 'photocar' }
     })
     .populate('version')
     .populate({
@@ -144,19 +134,19 @@ exports.findOne = (req, res) => {
     })
     .populate({
       path: 'version',
-      populate: { path: 'color' },
+      populate: { path: 'color' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'fuel' },
+      populate: { path: 'fuel' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'transmision' },
+      populate: { path: 'transmision' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'ecomark' },
+      populate: { path: 'ecomark' }
     })
     .populate({
       path: 'version',

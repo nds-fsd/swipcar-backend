@@ -105,7 +105,7 @@ exports.searchRentingOffer = (req, res) => {
   const reg = new RegExp(searchTextReg);
   console.log(searchTextReg);
   const query = {
-    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }]
   };
 
   RentingOffer.find(query)
