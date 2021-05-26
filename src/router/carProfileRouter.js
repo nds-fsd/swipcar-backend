@@ -9,11 +9,11 @@ CarProfileRouter.get('/', CarProfileController.findAll);
 
 // CarProfileRouter.get("/lengthData", CarProfileController.findAllLength);
 
+CarProfileRouter.get('/search', CarProfileController.search);
+
 CarProfileRouter.get('/:id', CarProfileController.findOne);
 
 CarProfileRouter.post('/', CarProfileController.createCarProfile);
-
-// CarProfileRouter.post('/search', CarProfileController.search);
 
 CarProfileRouter.put('/:id', CarProfileController.updateCarProfile);
 

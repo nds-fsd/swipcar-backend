@@ -18,6 +18,12 @@ const schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Provider',
     },
+    reservation: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Reservation',
+      },
+    ],
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );

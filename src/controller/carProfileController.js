@@ -15,10 +15,6 @@ exports.findAll = (req, res) => {
     .populate('model')
     .populate({
       path: 'model',
-      populate: { path: 'brand' },
-    })
-    .populate({
-      path: 'model',
       populate: { path: 'cartype' },
     })
     .populate({
@@ -26,6 +22,10 @@ exports.findAll = (req, res) => {
       populate: { path: 'photocar' },
     })
     .populate('version')
+    .populate({
+      path: 'version',
+      populate: { path: 'brand' },
+    })
     .populate({
       path: 'version',
       populate: { path: 'model' },
@@ -45,6 +45,26 @@ exports.findAll = (req, res) => {
     .populate({
       path: 'version',
       populate: { path: 'ecomark' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'provider' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'equipments' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'goodies' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'version' } },
     })
     .exec((err, CarProfiles) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
@@ -107,10 +127,6 @@ exports.findOne = (req, res) => {
     .populate('model')
     .populate({
       path: 'model',
-      populate: { path: 'brand' },
-    })
-    .populate({
-      path: 'model',
       populate: { path: 'cartype' },
     })
     .populate({
@@ -118,6 +134,10 @@ exports.findOne = (req, res) => {
       populate: { path: 'photocar' },
     })
     .populate('version')
+    .populate({
+      path: 'version',
+      populate: { path: 'brand' },
+    })
     .populate({
       path: 'version',
       populate: { path: 'model' },
@@ -138,9 +158,29 @@ exports.findOne = (req, res) => {
       path: 'version',
       populate: { path: 'ecomark' },
     })
-    .exec((err, carProfile) => {
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers' },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'provider' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'equipments' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'goodies' } },
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'rentingoffers', populate: { path: 'version' } },
+    })
+    .exec((err, CarProfiles) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
-      return res.status(200).json(carProfile);
+      return res.status(200).json(CarProfiles);
     });
 };
 
@@ -177,44 +217,24 @@ exports.deleteCarProfile = (req, res) => {
       res.status(500).json(error);
     });
 };
-// exports.findNewCars = (req, res) => {
-//   const { nuevo } = req.query;
-//   const data = {
-//     nuevo: true
-//   };
-//   CarProfile.find(data)
-//     .then((CarProfiles) => {
-//       res.status(200).json(CarProfiles);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error);
-//     });
-// };
 
-// exports.findUsedCars = (req, res) => {
-//   const { seminuevo } = req.query;
-//   const data = {
-//     seminuevo: true
-//   };
-//   CarProfile.find(data)
-//     .then((CarProfiles) => {
-//       res.status(200).json(CarProfiles);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error);
-//     });
-// };
+exports.search = (req, res) => {
+  const searchText = Object.keys(req.body).reduce(
+    (acc, curr) => `${acc} ${req.body[curr]}`,
+    ''
+  );
 
-// exports.findVanCars = (req, res) => {
-//   const { furgoneta } = req.query;
-//   const data = {
-//     furgoneta: true
-//   };
-//   CarProfile.find(data)
-//     .then((CarProfiles) => {
-//       res.status(200).json(CarProfiles);
-//     })
-//     .catch((error) => {
-//       res.status(500).json(error);
-//     });
-// };
+  console.log(searchText);
+
+  const query = { $text: { $search: searchText } };
+
+  CarProfile.find(query, { score: { $meta: 'textScore' } })
+    .sort({ score: { $meta: 'textScore' } })
+    .then((objects) => {
+      objects.filter((o) => o.score > 1);
+      res.status(200).json(objects);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+};
