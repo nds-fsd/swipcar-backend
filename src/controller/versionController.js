@@ -13,6 +13,10 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const { id } = req.params;
   Version.findById(id)
+    .populate({
+      path: 'model',
+      populate: { path: 'cartype' }
+    })
     .then((version) => {
       res.status(200).json(version);
     })

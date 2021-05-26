@@ -2,7 +2,17 @@ const { RentingOffer } = require('../mongo');
 
 exports.findAll = (req, res) => {
   RentingOffer.find()
-    .populate('carprofile')
+    .populate('carProfile')
+    .populate('provider')
+    .populate('version')
+    .populate({
+      path: 'version',
+      populate: { path: 'brand' }
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'model' }
+    })
     .populate('goodies')
     .populate('equipments')
     .exec((err, rentingOffers) => {
@@ -15,8 +25,22 @@ exports.findOne = (req, res) => {
   const { id } = req.params;
   RentingOffer.findById(id)
     .populate('carprofile')
-    .populate('goodies')
-    .populate('equipments')
+    .populate({
+      path: 'carprofile',
+      populate: { path: 'brand' }
+    })
+    .populate('provider')
+    .populate('version')
+    // .populate({
+    //   path: 'version',
+    //   populate: { path: 'brand' }
+    // })
+    .populate({
+      path: 'version',
+      populate: { path: 'model' }
+    })
+    // .populate('goodies')
+    // .populate('equipments')
     .exec((err, rentingOffer) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
       return res.status(200).json(rentingOffer);
@@ -67,7 +91,7 @@ exports.searchRentingOffer = (req, res) => {
   const reg = new RegExp(searchTextReg);
   console.log(searchTextReg);
   const query = {
-    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }]
   };
 
   RentingOffer.find(query)

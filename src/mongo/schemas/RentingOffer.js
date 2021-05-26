@@ -1,7 +1,19 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  version: { type: Boolean, required: true },
+  version: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Version',
+  },
+  provider: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Provider',
+  },
+  carProfile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'CarProfile',
+  },
+  // version: { type: Boolean, required: true },
   newcar: { type: Boolean, required: true },
   price: { type: String, required: true },
   km: { type: String, required: true },
@@ -9,10 +21,6 @@ const schema = new mongoose.Schema({
   fuel: { type: String, required: true },
   transmision: { type: String, required: true },
   color: { type: String, required: true },
-  carprofile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'CarProfile',
-  },
   goodies: [
     {
       type: mongoose.Schema.Types.ObjectId,
