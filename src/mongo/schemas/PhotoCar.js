@@ -4,6 +4,7 @@ const schema = new mongoose.Schema(
   {
     modelname: { type: String, required: true },
     photourl: { type: String, required: true },
+    sliderurl: { type: String, required: true },
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );

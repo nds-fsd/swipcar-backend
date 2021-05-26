@@ -74,6 +74,7 @@ const configSecurity = (app) => {
         '/register',
         /^\/brand\/.*/,
         /^\/model\/.*/,
+        /^\/cartype\/.*/,
         /^\/version\/.*/,
         /^\/photocar\/.*/,
         /^\/goody\/.*/,
@@ -82,6 +83,9 @@ const configSecurity = (app) => {
         /^\/fuel\/.*/,
         /^\/transmision\/.*/,
         /^\/carprofile\/.*/,
+        /^\/rentingoffer\/.*/,
+        /^\/provider\/.*/,
+        /^\/reservation\/.*/,
       ],
     })
   );

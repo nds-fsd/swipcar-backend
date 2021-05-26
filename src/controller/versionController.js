@@ -2,22 +2,44 @@ const { Version } = require('../mongo');
 
 exports.findAll = (req, res) => {
   Version.find()
-    .then((versions) => {
-      res.status(200).json(versions);
+    .populate('brand')
+    .populate('model')
+    .populate('ecomark')
+    .populate('model')
+    .populate('rentingoffers')
+    .populate({
+      path: 'rentingoffers',
+      populate: { path: 'goodies' },
     })
-    .catch((error) => {
-      res.status(500).json(error);
+    .populate({
+      path: 'rentingoffers',
+      populate: { path: 'equipments' },
+    })
+    .exec((err, Versiones) => {
+      if (err) return res.status(500).json({ error: err.getMessage() });
+      return res.status(200).json(Versiones);
     });
 };
 
 exports.findOne = (req, res) => {
   const { id } = req.params;
   Version.findById(id)
-    .then((version) => {
-      res.status(200).json(version);
+    .populate('brand')
+    .populate('model')
+    .populate('ecomark')
+    .populate('model')
+    .populate('rentingoffers')
+    .populate({
+      path: 'rentingoffers',
+      populate: { path: 'goodies' },
     })
-    .catch((error) => {
-      res.status(500).json(error);
+    .populate({
+      path: 'rentingoffers',
+      populate: { path: 'equipments' },
+    })
+    .exec((err, Versiones) => {
+      if (err) return res.status(500).json({ error: err.getMessage() });
+      return res.status(200).json(Versiones);
     });
 };
 

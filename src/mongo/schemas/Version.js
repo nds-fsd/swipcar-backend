@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema(
   {
     version: { type: String, required: true, unique: true },
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Brand',
+      required: true,
+    },
     model: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Model',
@@ -29,13 +34,20 @@ const schema = new mongoose.Schema(
         required: true,
       },
     ],
-    motor: { type: Number, required: true },
-    displacement: { type: Number, required: true },
     ecomark: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'EcoMark',
       required: true,
     },
+    rentingoffers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'RentingOffer',
+        required: true,
+      },
+    ],
+    motor: { type: Number, required: true },
+    displacement: { type: Number, required: true },
     emission: { type: Number, required: true },
     comsumption: { type: Number, required: true },
     doors: { type: Number, required: true },

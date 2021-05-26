@@ -7,9 +7,15 @@ RentingOfferRouter.get('/', RentingOfferController.findAll);
 
 RentingOfferRouter.get('/:id', RentingOfferController.findOne);
 
-/* RentingOfferRouter.post('/', RentingOfferController.createRentingOffer);
+RentingOfferRouter.post('/', RentingOfferController.createRentingOffer);
 
-RentingOfferRouter.post('/search', RentingOfferController.searchRentingOffer); */
+RentingOfferRouter.post('/newcars', RentingOfferController.findNewCars);
+
+RentingOfferRouter.post('/usedcars', RentingOfferController.findUsedCars);
+
+RentingOfferRouter.post('/vancars', RentingOfferController.findVanCars);
+
+RentingOfferRouter.post('/search', RentingOfferController.search);
 
 RentingOfferRouter.put('/:id', RentingOfferController.updateRentingOffer);
 
