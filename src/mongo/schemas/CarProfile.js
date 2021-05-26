@@ -12,11 +12,13 @@ const schema = new mongoose.Schema(
       ref: 'Model',
       required: true,
     },
-    version: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Version',
-      required: true,
-    },
+    version: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Version',
+        required: true,
+      },
+    ],
   },
   { timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' } }
 );

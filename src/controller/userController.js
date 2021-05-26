@@ -4,6 +4,7 @@ exports.findAll = (req, res) => {
   User.find()
     .populate('location')
     .populate('provider')
+    .populate('reservations')
     .exec((err, Users) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
       return res.status(200).json(Users);
@@ -15,6 +16,7 @@ exports.findOne = (req, res) => {
   User.findById(id)
     .populate('location')
     .populate('provider')
+    .populate('reservations')
     .exec((err, user) => {
       if (err) return res.status(500).json({ error: err.getMessage() });
       return res.status(200).json(user);
