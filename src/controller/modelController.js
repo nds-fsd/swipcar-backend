@@ -15,7 +15,7 @@ exports.findAll = (req, res) => {
     .populate('cartype')
     .populate('photocar')
     .exec((err, Models) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json(err);
       return res.status(200).json(Models);
     });
 };
@@ -27,7 +27,7 @@ exports.findOne = (req, res) => {
     .populate('cartype')
     .populate('photocar')
     .exec((err, Models) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json(err);
       return res.status(200).json(Models);
     });
 };

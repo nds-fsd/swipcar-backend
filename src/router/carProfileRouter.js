@@ -11,6 +11,8 @@ CarProfileRouter.post("/dataoptions", CarProfileController.getDataCarProfiles);
 
 CarProfileRouter.get('/search', CarProfileController.search);
 
+CarProfileRouter.get('/bymodel/:id', CarProfileController.findByModel);
+
 CarProfileRouter.get('/:id', CarProfileController.findOne);
 
 CarProfileRouter.post('/', CarProfileController.createCarProfile);

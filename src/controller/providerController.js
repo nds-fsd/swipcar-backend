@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     .populate('rentingOffers')
     .populate('reservations')
     .exec((err, Providers) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(Providers);
     });
 };
@@ -16,7 +16,7 @@ exports.findOne = (req, res) => {
     .populate('rentingOffers')
     .populate('reservations')
     .exec((err, Provider) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(Provider);
     });
 };

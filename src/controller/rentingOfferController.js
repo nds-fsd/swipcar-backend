@@ -8,24 +8,24 @@ exports.findAll = (req, res) => {
     .populate('carProfile')
     .populate({
       path: 'version',
-      populate: { path: 'model' },
+      populate: { path: 'model' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'cartype' } },
+      populate: { path: 'model', populate: { path: 'cartype' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'photocar' } },
+      populate: { path: 'model', populate: { path: 'photocar' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'brand' },
+      populate: { path: 'brand' }
     })
     .populate('goodies')
     .populate('equipments')
     .exec((err, rentingOffers) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(rentingOffers);
     });
 };
@@ -39,24 +39,24 @@ exports.findOne = (req, res) => {
     .populate('version')
     .populate({
       path: 'version',
-      populate: { path: 'model' },
+      populate: { path: 'model' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'cartype' } },
+      populate: { path: 'model', populate: { path: 'cartype' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'photocar' } },
+      populate: { path: 'model', populate: { path: 'photocar' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'brand' },
+      populate: { path: 'brand' }
     })
     .populate('goodies')
     .populate('equipments')
     .exec((err, rentingOffer) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(rentingOffer);
     });
 };
@@ -133,24 +133,24 @@ exports.search = (req, res) => {
     .populate('version')
     .populate({
       path: 'version',
-      populate: { path: 'model' },
+      populate: { path: 'model' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'cartype' } },
+      populate: { path: 'model', populate: { path: 'cartype' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'photocar' } },
+      populate: { path: 'model', populate: { path: 'photocar' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'brand' },
+      populate: { path: 'brand' }
     })
     .populate('goodies')
     .populate('equipments')
     .exec((err, objects) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(objects);
     });
 };
@@ -158,13 +158,13 @@ exports.search = (req, res) => {
 exports.findNewCars = (req, res) => {
   const { newcar } = req.query;
   const data = {
-    newcar: true,
+    newcar: true
   };
   RentingOffer.find(data)
 
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers' },
+      populate: { path: 'rentingoffers' }
     })
     .then((RentingOffers) => {
       res.status(200).json(RentingOffers);
@@ -173,10 +173,11 @@ exports.findNewCars = (req, res) => {
       res.status(500).json(error);
     });
 };
+
 exports.findUsedCars = (req, res) => {
   const { seminuevo } = req.query;
   const data = {
-    newcar: false,
+    newcar: false
   };
   RentingOffer.find(data)
     .then((RentingOffers) => {
@@ -190,17 +191,108 @@ exports.findUsedCars = (req, res) => {
 exports.findVanCars = (req, res) => {
   const { furgoneta } = req.query;
   const data = {
-    furgoneta: true,
+    furgoneta: true
   };
   RentingOffer.find(data)
     .populate({
       path: 'version',
-      populate: { path: 'model', populate: { path: 'cartype' } },
+      populate: { path: 'model', populate: { path: 'cartype' } }
     })
     .then((RentingOffers) => {
       res.status(200).json(RentingOffer);
     })
     .catch((error) => {
       res.status(500).json(error);
+    });
+};
+
+
+exports.findByProvider = async (req, res) => {
+  const { id } = req.params;
+  const page = Math.max(0, req.body.skip);
+  const limit = req.body.limit ? Math.max(1, req.body.limit) : 10;
+  const { sort } = req.body;
+  const sortDirection = req.body.dir || 'asc';
+  let sortObject = {};
+  if (sort && sortDirection) {
+    sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
+  }
+  const totalElements = await RentingOffer.find({ provider: id }).count();
+
+  RentingOffer.find({ provider: id })
+  .sort(sortObject)
+  .limit(limit)
+  .skip(page)
+  .populate('rentingoffers')
+  .populate('provider')
+  .populate('version')
+  .populate('carProfile')
+  .populate({
+    path: 'version',
+    populate: { path: 'model' }
+  })
+  .populate({
+    path: 'version',
+    populate: { path: 'model', populate: { path: 'cartype' } }
+  })
+  .populate({
+    path: 'version',
+    populate: { path: 'model', populate: { path: 'photocar' } }
+  })
+  .populate({
+    path: 'version',
+    populate: { path: 'brand' }
+  })
+  .populate('goodies')
+  .populate('equipments')
+  .exec((err, rentingOffers) => {
+    if (err) return res.status(500).json({ error: err });
+    const result = { elements: rentingOffers, totalElements };
+    return res.status(200).json(result);
+  });
+};
+
+
+exports.findAllRentingOffers = async (req, res) => {
+  const page = Math.max(0, req.body.skip);
+  const limit = req.body.limit ? Math.max(1, req.body.limit) : 10;
+  const { sort } = req.body;
+  const sortDirection = req.body.dir || 'asc';
+  let sortObject = {};
+  if (sort && sortDirection) {
+    sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
+  }
+  const totalElements = await RentingOffer.find().count();
+  
+  RentingOffer.find()
+    .sort(sortObject)
+    .limit(limit)
+    .skip(page)
+    .populate('rentingoffers')
+    .populate('provider')
+    .populate('version')
+    .populate('carProfile')
+    .populate({
+      path: 'version',
+      populate: { path: 'model' }
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'model', populate: { path: 'cartype' } }
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'model', populate: { path: 'photocar' } }
+    })
+    .populate({
+      path: 'version',
+      populate: { path: 'brand' }
+    })
+    .populate('goodies')
+    .populate('equipments')
+    .exec((err, rentingOffers) => {
+      if (err) return res.status(500).json({ error: err });
+      const result = { elements: rentingOffers, totalElements };
+      return res.status(200).json(result);
     });
 };
