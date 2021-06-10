@@ -6,6 +6,9 @@ const cors = require('cors');
 
 const bodyParser = require('body-parser');
 
+const mailer = require("./mailer");
+
+//! dev Comment
 const configureSockets = require('./socket');
 
 app.use(cors());
@@ -25,4 +28,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', appRouter);
 
+
+app.post('/signup', (req, res) => {
+    const data = req.body;
+    mailer.sendSignUpEmail(data, data.email).then((response) => {
+      res.status(200).json(response);
+    });
+  });
+
+app.post('/newreservation', (req, res) => {
+    const data = req.body;
+    mailer.sendNewRentingEmail(data, data.email).then((response) => {
+      res.status(200).json(response);
+    });
+  });
+
+
+//! dev Comment
 app.use('/', authRouter);

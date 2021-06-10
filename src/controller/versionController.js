@@ -16,7 +16,7 @@ exports.findAll = (req, res) => {
       populate: { path: 'equipments' },
     })
     .exec((err, Versiones) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ err });
       return res.status(200).json(Versiones);
     });
 };
@@ -28,6 +28,12 @@ exports.findOne = (req, res) => {
     .populate('model')
     .populate('ecomark')
     .populate('model')
+    //! spring04
+    .populate({
+      path: 'model',
+      populate: { path: 'cartype' }
+    })
+    //! spring04
     .populate('rentingoffers')
     .populate({
       path: 'rentingoffers',
@@ -38,9 +44,20 @@ exports.findOne = (req, res) => {
       populate: { path: 'equipments' },
     })
     .exec((err, Versiones) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ err });
       return res.status(200).json(Versiones);
     });
+};
+
+exports.getDataOptionsVersions = (req, res) => {
+  const { id } = req.params;
+  Version.findById(id)
+  .then((version) => {
+    res.status(200).json(version);
+  })
+  .catch((error) => {
+    res.status(500).json(error);
+  });
 };
 
 exports.create = (req, res) => {
@@ -88,5 +105,31 @@ exports.findByModel = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json(error);
+    });
+};
+
+exports.getDataVersions = async (req, res) => {
+  const page = Math.max(0, req.body.skip);
+  const limit = req.body.limit ? Math.max(1, req.body.limit) : 10;
+  const { sort } = req.body;
+  const sortDirection = req.body.dir || 'asc';
+  let sortObject = {};
+  if (sort && sortDirection) {
+    sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
+  }
+
+  const totalElements = await Version.find().count();
+
+  Version.find()
+    // Version.find({ brandname: 'Kia' }) //! queryy de busqueda
+    .sort(sortObject)
+    .limit(limit)
+    .skip(page)
+    .populate('brand')
+    .populate('model')
+    .exec((err, versions) => {
+      if (err) return res.status(500).json({ err });
+      const result = { elements: versions, totalElements };
+      return res.status(200).json(result);
     });
 };

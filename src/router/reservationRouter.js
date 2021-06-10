@@ -15,4 +15,8 @@ ReservationRouter.put('/:id', ReservationController.updateReservation);
 
 ReservationRouter.delete('/:id', ReservationController.deleteReservation);
 
+ReservationRouter.post('/byUser/:id', ReservationController.findByUser);
+
+ReservationRouter.post('/byProvider/:id', ReservationController.findByProvider);
+
 module.exports = { ReservationRouter };

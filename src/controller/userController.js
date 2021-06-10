@@ -6,7 +6,8 @@ exports.findAll = (req, res) => {
     .populate('provider')
     .populate('reservations')
     .exec((err, Users) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
+      // if (err) return res.status(500).json(err);
       return res.status(200).json(Users);
     });
 };
@@ -18,7 +19,8 @@ exports.findOne = (req, res) => {
     .populate('provider')
     .populate('reservations')
     .exec((err, user) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
+      // if (err) return res.status(500).json(err);
       return res.status(200).json(user);
     });
 };

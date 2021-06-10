@@ -15,4 +15,7 @@ ProviderRouter.put('/:id', ProviderController.updateProvider);
 
 ProviderRouter.delete('/:id', ProviderController.deleteProvider);
 
+
+ProviderRouter.get('/reservations/:id', ProviderController.findReservationsArray);
+
 module.exports = { ProviderRouter };

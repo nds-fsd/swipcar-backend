@@ -21,4 +21,11 @@ RentingOfferRouter.put('/:id', RentingOfferController.updateRentingOffer);
 
 RentingOfferRouter.delete('/:id', RentingOfferController.deleteRentingOffer);
 
+
+
+RentingOfferRouter.post('/byProvider/:id', RentingOfferController.findByProvider);
+
+RentingOfferRouter.post('/allRentingOffers', RentingOfferController.findAllRentingOffers);
+
+
 module.exports = { RentingOfferRouter };

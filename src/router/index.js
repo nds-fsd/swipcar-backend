@@ -37,6 +37,7 @@ const { LocationRouter } = require('./locationRouter');
 const { ProviderRouter } = require('./providerRouter');
 const { ReservationRouter } = require('./reservationRouter');
 const { RentingOfferRouter } = require('./rentingOfferRouter');
+// const { SendEmailRouter } = require('./sendEmailRouter');
 
 const appRouter = express.Router();
 
@@ -57,5 +58,6 @@ appRouter.use('/location', LocationRouter);
 appRouter.use('/provider', ProviderRouter);
 appRouter.use('/reservation', ReservationRouter);
 appRouter.use('/rentingoffer', RentingOfferRouter);
+// appRouter.use('/sendemail', SendEmailRouter);
 
 module.exports = appRouter;

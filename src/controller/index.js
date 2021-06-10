@@ -15,6 +15,7 @@ const LocationController = require('./locationController');
 const ProviderController = require('./providerController');
 const ReservationController = require('./reservationController');
 const RentingOfferController = require('./rentingOfferController');
+// const SendEmailController = require('./sendEmailController');
 
 module.exports = {
   UserController,
@@ -34,4 +35,5 @@ module.exports = {
   ProviderController,
   ReservationController,
   RentingOfferController,
+  // SendEmailController
 };
