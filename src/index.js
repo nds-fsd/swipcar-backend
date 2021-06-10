@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const mailer = require("./mailer");
 
 //! dev Comment
-// const configureSockets = require('./socket');
+const configureSockets = require('./socket');
 
 app.use(cors());
 
@@ -17,25 +17,17 @@ const server = app.listen(process.env.PORT, () => {
   console.log('server is running on port', server.address().port);
 });
 
-//! dev Comment
-// const { configSecurity, authRouter } = require('./security/jwt');
-
+const { configSecurity, authRouter } = require('./security/jwt');
 
 const appRouter = require('./router');
 
-//! dev Comment
-// configSecurity(app);
-// require('./socket');
-//! dev Comment
+configSecurity(app);
+require('./socket');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', appRouter);
 
-//! dev Comment
-// app.use('/', authRouter);
-
-//! Send Email
 
 app.post('/signup', (req, res) => {
     const data = req.body;
@@ -50,3 +42,7 @@ app.post('/newreservation', (req, res) => {
       res.status(200).json(response);
     });
   });
+
+
+//! dev Comment
+app.use('/', authRouter);
