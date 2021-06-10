@@ -21,6 +21,17 @@ exports.findOne = (req, res) => {
     });
 };
 
+exports.findReservationsArray = (req, res) => {
+  const { id } = req.params;
+  Provider.findById(id)
+    .then((reservations) => {
+      res.status(200).json(reservations);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
+};
+
 exports.createProvider = (req, res) => {
   const data = req.body;
   const newProvider = new Provider(data);
@@ -65,7 +76,7 @@ exports.searchProvider = (req, res) => {
   const reg = new RegExp(searchTextReg);
   console.log(searchTextReg);
   const query = {
-    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }]
   };
 
   Provider.find(query)

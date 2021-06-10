@@ -147,7 +147,9 @@ exports.findByProvider = async (req, res) => {
   if (sort && sortDirection) {
     sortObject[sort] = sortDirection === 'asc' ? 1 : -1;
   }
-  const totalElements = await Reservation.find({rentingOffer: { provider: id } })
+  const totalElements = await Reservation.find({
+    rentingOffer: { provider: id }
+  })
     .populate('rentingoffer')
     .populate({
       path: 'rentingoffer',
@@ -164,7 +166,7 @@ exports.findByProvider = async (req, res) => {
     .populate('user')
     .count();
 
-  Reservation.find({rentingOffer: { provider: id } })
+  Reservation.find({ rentingOffer: { provider: id } })
     .sort(sortObject)
     .limit(limit)
     .skip(page)
