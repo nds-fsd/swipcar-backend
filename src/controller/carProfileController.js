@@ -229,7 +229,7 @@ exports.search = (req, res) => {
     ''
   );
 
-  console.log(searchText);
+  // console.log(searchText);
 
   const query = { $text: { $search: searchText } };
 

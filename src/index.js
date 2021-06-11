@@ -38,7 +38,7 @@ app.post('/signup', (req, res) => {
 
 app.post('/newreservation', (req, res) => {
     const data = req.body;
-    mailer.sendNewRentingEmail(data, data.email).then((response) => {
+    mailer.sendNewRentingEmail(data, data.emailProvider).then((response) => {
       res.status(200).json(response);
     });
   });
