@@ -402,7 +402,7 @@ const htmlSignup = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 20px; padding-left: 20px; padding-top: 10px; padding-bottom: 10px; font-family: Tahoma, Verdana, sans-serif"><![endif]-->
 <div style="color:#3d443d;font-family:'Roboto', Tahoma, Verdana, Segoe, sans-serif;line-height:1.5;padding-top:10px;padding-right:20px;padding-bottom:10px;padding-left:20px;">
 <div class="txtTinyMce-wrapper" style="line-height: 1.5; font-size: 12px; font-family: 'Roboto', Tahoma, Verdana, Segoe, sans-serif; color: #3d443d; mso-line-height-alt: 18px;">
-<p style="margin: 0; text-align: center; line-height: 1.5; word-break: break-word; font-size: 17px; mso-line-height-alt: 26px; mso-ansi-font-size: 18px; margin-top: 0; margin-bottom: 0;"><span style="font-size: 17px; mso-ansi-font-size: 18px;">En EcoCars encontrará un sin fin de ofertas en rentings de automóviles con las que podrá renovar su vehículo con las mejores opciones de mantenimiento y a unos precios super competitivos. No espere más, ¡descúbralo usted mismo!</span></p>
+<p style="margin: 0; text-align: center; line-height: 1.5; word-break: break-word; font-size: 17px; mso-line-height-alt: 26px; mso-ansi-font-size: 18px; margin-top: 0; margin-bottom: 0;"><span style="font-size: 17px; mso-ansi-font-size: 18px;">En EcoCars encontrará un sin fin de ofertas en rentings de automóviles con las que podrá renovar su vehículo con las mejores opciones de mantenimiento. No espere más, ¡descúbralo usted mismo!</span></p>
 </div>
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
