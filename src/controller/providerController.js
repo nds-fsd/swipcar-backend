@@ -5,7 +5,7 @@ exports.findAll = (req, res) => {
     .populate('rentingOffers')
     .populate('reservations')
     .exec((err, Providers) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(Providers);
     });
 };
@@ -16,8 +16,19 @@ exports.findOne = (req, res) => {
     .populate('rentingOffers')
     .populate('reservations')
     .exec((err, Provider) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json({ error: err });
       return res.status(200).json(Provider);
+    });
+};
+
+exports.findReservationsArray = (req, res) => {
+  const { id } = req.params;
+  Provider.findById(id)
+    .then((reservations) => {
+      res.status(200).json(reservations);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
     });
 };
 
@@ -65,7 +76,7 @@ exports.searchProvider = (req, res) => {
   const reg = new RegExp(searchTextReg);
   console.log(searchTextReg);
   const query = {
-    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }],
+    $or: [{ name: { $regex: reg } }, { email: { $regex: reg } }]
   };
 
   Provider.find(query)

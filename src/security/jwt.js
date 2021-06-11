@@ -72,10 +72,13 @@ const configSecurity = (app) => {
       path: [
         '/login',
         '/register',
+        '/signup',
         /^\/brand\/.*/,
         /^\/model\/.*/,
         /^\/cartype\/.*/,
         /^\/version\/.*/,
+        /^\/ecomark\/.*/,
+        /^\/color\/.*/,
         /^\/photocar\/.*/,
         /^\/goody\/.*/,
         /^\/equipment\/.*/,
@@ -86,6 +89,7 @@ const configSecurity = (app) => {
         /^\/rentingoffer\/.*/,
         /^\/provider\/.*/,
         /^\/reservation\/.*/,
+        /^\/newreservation\/.*/,
       ],
     })
   );

@@ -15,7 +15,7 @@ exports.findAll = (req, res) => {
     .populate('model')
     .populate({
       path: 'model',
-      populate: { path: 'cartype' },
+      populate: { path: 'cartype' }
     })
     .populate({
       path: 'model',
@@ -24,11 +24,11 @@ exports.findAll = (req, res) => {
     .populate('version')
     .populate({
       path: 'version',
-      populate: { path: 'brand' },
+      populate: { path: 'brand' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model' },
+      populate: { path: 'model' }
     })
     .populate({
       path: 'version',
@@ -48,26 +48,26 @@ exports.findAll = (req, res) => {
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers' },
+      populate: { path: 'rentingoffers' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'provider' } },
+      populate: { path: 'rentingoffers', populate: { path: 'provider' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'equipments' } },
+      populate: { path: 'rentingoffers', populate: { path: 'equipments' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'goodies' } },
+      populate: { path: 'rentingoffers', populate: { path: 'goodies' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'version' } },
+      populate: { path: 'rentingoffers', populate: { path: 'version' } }
     })
     .exec((err, CarProfiles) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json(err);
       return res.status(200).json(CarProfiles);
     });
 };
@@ -104,9 +104,20 @@ exports.getDataCarProfiles = async (req, res) => {
     .populate('model')
     .populate('version')
     .exec((err, carProfiles) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
-      const result = { elements: carProfiles, totalPages: totalElements };
+      if (err) return res.status(500).json(err);
+      const result = { elements: carProfiles, totalElements };
       return res.status(200).json(result);
+    });
+};
+
+exports.findByModel = async (req, res) => {
+  const { id } = req.params;
+  CarProfile.findOne({ model: id })
+    .populate('brand')
+    .populate('model')
+    .exec((err, carProfiles) => {
+      if (err) return res.status(500).json(err);
+      return res.status(200).json(carProfiles);
     });
 };
 
@@ -117,7 +128,7 @@ exports.findOne = (req, res) => {
     .populate('model')
     .populate({
       path: 'model',
-      populate: { path: 'cartype' },
+      populate: { path: 'cartype' }
     })
     .populate({
       path: 'model',
@@ -126,11 +137,11 @@ exports.findOne = (req, res) => {
     .populate('version')
     .populate({
       path: 'version',
-      populate: { path: 'brand' },
+      populate: { path: 'brand' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'model' },
+      populate: { path: 'model' }
     })
     .populate({
       path: 'version',
@@ -150,26 +161,26 @@ exports.findOne = (req, res) => {
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers' },
+      populate: { path: 'rentingoffers' }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'provider' } },
+      populate: { path: 'rentingoffers', populate: { path: 'provider' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'equipments' } },
+      populate: { path: 'rentingoffers', populate: { path: 'equipments' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'goodies' } },
+      populate: { path: 'rentingoffers', populate: { path: 'goodies' } }
     })
     .populate({
       path: 'version',
-      populate: { path: 'rentingoffers', populate: { path: 'version' } },
+      populate: { path: 'rentingoffers', populate: { path: 'version' } }
     })
     .exec((err, CarProfiles) => {
-      if (err) return res.status(500).json({ error: err.getMessage() });
+      if (err) return res.status(500).json(err);
       return res.status(200).json(CarProfiles);
     });
 };
@@ -177,9 +188,13 @@ exports.findOne = (req, res) => {
 exports.createCarProfile = (req, res) => {
   const data = req.body;
   const newCarProfile = new CarProfile(data);
-  newCarProfile.save((err, CarProfile) => {
-    if (err) return res.status(500).json({ error: err.getMessage() });
-    return res.status(200).json({ CarProfile });
+  newCarProfile
+  .save()
+  .then((carProfile) => {
+    res.status(200).json(carProfile);
+  })
+  .catch((error) => {
+    res.status(500).json(error);
   });
 };
 
@@ -214,7 +229,7 @@ exports.search = (req, res) => {
     ''
   );
 
-  console.log(searchText);
+  // console.log(searchText);
 
   const query = { $text: { $search: searchText } };
 

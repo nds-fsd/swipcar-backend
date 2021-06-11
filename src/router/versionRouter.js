@@ -15,4 +15,9 @@ VersionRouter.put("/:id", VersionController.update);
 
 VersionRouter.delete("/:id", VersionController.delete);
 
+VersionRouter.get("/optionsversion/:id", VersionController.getDataOptionsVersions);
+
+VersionRouter.post("/dataoptions", VersionController.getDataVersions);
+
 module.exports = { VersionRouter };
+
