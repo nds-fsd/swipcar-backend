@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 
 const mailer = require("./mailer");
 
-//! dev Comment
 const configureSockets = require('./socket');
 
 app.use(cors());
@@ -43,6 +42,4 @@ app.post('/newreservation', (req, res) => {
     });
   });
 
-
-//! dev Comment
 app.use('/', authRouter);
